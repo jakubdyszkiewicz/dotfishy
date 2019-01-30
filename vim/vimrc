@@ -1,0 +1,40 @@
+set number "Line numbers are good
+set gcr=a:blinkon0 "Disable cursor blink
+set visualbell "No sounds
+"turn on syntax highlighting
+syntax on
+let mapleader=","
+set mouse=a
+
+" ================ Turn Off Swap Files ==============
+
+set noswapfile
+set nobackup
+set nowb
+
+" ================ Indentation ======================
+
+set autoindent
+set smartindent
+set smarttab
+set shiftwidth=4
+set softtabstop=4
+set tabstop=4
+set expandtab
+
+set nowrap       "Don't wrap lines
+set linebreak    "Wrap lines at convenient points
+
+" ================ Scrolling ========================
+
+set scrolloff=8         "Start scrolling when we're 8 lines away from margins
+set sidescrolloff=15
+set sidescroll=1
+
+set laststatus=2
+set noshowmode "Show current mode down the bottom
+
+set background=light
+colorscheme solarized
+
+map <C-n> :NERDTreeToggle<CR>

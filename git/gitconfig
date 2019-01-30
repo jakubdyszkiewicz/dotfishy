@@ -1,0 +1,9 @@
+[user]
+	email = jakub.dyszkiewicz@allegro.pl
+	name = Jakub Dyszkiewicz
+[alias]
+    llog = log --pretty=format:'%C(yellow)%h %Cred%ad %Cblue%an%Cgreen%d %Creset%s' --date=iso
+    glog = log --pretty=format:'%C(yellow)%h %Cred%ad %Cblue%an%Cgreen%d %Creset%s' --date=iso --graph
+    gloga = log --pretty=format:'%C(yellow)%h %Cred%ad %Cblue%an%Cgreen%d %Creset%s' --date=iso --graph --all
+[init]
+	templatedir = /Users/jakub.dyszkiewicz/.git-templates
