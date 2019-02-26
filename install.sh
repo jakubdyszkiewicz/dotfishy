@@ -100,3 +100,7 @@ link_file $rootDir/vim/solarized.vim ~/.vim/colors/solarized.vim
 
 echo ">> Installing Visual Studio Code settings"
 link_file $rootDir/vscode/settings.json "$HOME/Library/Application Support/Code/User/settings.json"
+
+echo ">> Install sshrc"
+link_file $rootDir/sshrc/.sshrc ~/.sshrc
+link_file $rootDir/sshrc/.sshrc.d ~/.sshrc.d

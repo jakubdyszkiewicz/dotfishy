@@ -73,6 +73,12 @@ Run `./install.sh` again.
 ### Visual Studio Code
 * Solarized Light Theme
 
+### sshrc
+Use simple bash config on the remote machine. It sets up:
+* Custom prompt
+* Lite version of [FZF](https://github.com/jeetsukumaran/fuzzysnake)
+* Simple aliases (`..`, `ll`, `la`)
+
 ## TODO
 * Hammerspoon mods docs
 * Solarized Light `bat` theme
