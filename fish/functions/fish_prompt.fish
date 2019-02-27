@@ -89,12 +89,12 @@ function fish_prompt
   # Logged in user
   __simple_ass_prompt_get_user
   set_color normal
-  printf ' at '
+  #printf ' at '
 
   # Machine logged in to
   #__simple_ass_prompt_get_host
   #set_color normal
-  #printf ' in '
+  printf ' in '
 
   # Path
   __simple_ass_prompt_pwd
