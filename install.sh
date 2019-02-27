@@ -9,14 +9,14 @@ link_file () {
     mkdir -p $dst_dir
     echo $dst
     if [ -e "$dst" ]; then
-        if [ "$(readlink $dst)" = "$src" ]; then
+        if [ `readlink "$dst"` = "$src" ]; then
             echo "$src is already linked to $dst"
         else
             read -p "$dst already exist. Replace it (y/[N])? " answer
             case ${answer:0:1} in
                 y|Y )
                     echo "Removing $dst"
-                    rm "$dst"
+                    rm -rf "$dst"
                     echo "Linking $src to $dst"
                     ln -s "$src" "$dst"
                 ;;

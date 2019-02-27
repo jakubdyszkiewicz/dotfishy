@@ -2,7 +2,7 @@ set -o vi
 
 source "$SSHHOME/.sshrc.d/prompt.bash"
 
-export PS1="\n\e[34m\]\u\[\e[m\] at \[\e[m\]\[\e[31m\]\h\[\e[m\] in \[\e[32m\]\w\[\e[m\]\[\e[35m\]\`parse_git_branch\` \[\e[m\]\n\e[91m❯❯❯ \e[39m"
+export PS1="\n\e[34m\]\u\[\e[m\] at \[\e[m\]\[\e[31m\]`hostname -f`\[\e[m\] in \[\e[32m\]\w\[\e[m\]\[\e[35m\]\`parse_git_branch\` \[\e[m\]\n\e[91m❯❯❯ \e[39m"
 export FUZZYSNAKE_EDITOR='vim'
 
 alias fz="python $SSHHOME/.sshrc.d/bin/fz.pyc"

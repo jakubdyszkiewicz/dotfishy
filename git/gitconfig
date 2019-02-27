@@ -1,5 +1,5 @@
 [user]
-	email = jakub.dyszkiewicz@allegro.pl
+	email = jakub.dyszkiewicz@gmail.com
 	name = Jakub Dyszkiewicz
 [alias]
     llog = log --pretty=format:'%C(yellow)%h %Cred%ad %Cblue%an%Cgreen%d %Creset%s' --date=iso
@@ -7,3 +7,7 @@
     gloga = log --pretty=format:'%C(yellow)%h %Cred%ad %Cblue%an%Cgreen%d %Creset%s' --date=iso --graph --all
 [init]
 	templatedir = /Users/jakub.dyszkiewicz/.git-templates
+[push]
+    default = current
+[includeIf "gitdir:~/allegro/*"]
+    path = .gitconfig-work

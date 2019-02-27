@@ -1,5 +1,5 @@
-if not set -q abbrs_initialized
-  set -U abbrs_initialized
+#if not set -q abbrs_initialized
+#  set -U abbrs_initialized
 
   abbr g 'git'
   abbr ga 'git add'
@@ -23,9 +23,12 @@ if not set -q abbrs_initialized
   abbr gro 'git reset --hard origin/master'
 
   abbr cls 'clear'
+  abbr cx 'chmod +x'
 
   abbr postgres_start 'pg_ctl -D /usr/local/var/postgres -l /usr/local/var/postgres/server.log start'
   abbr postgres_stop 'pg_ctl -D /usr/local/var/postgres stop -s -m fast'
 
   abbr psg 'ps aux | grep'
-end
+
+  abbr pserv 'python -m SimpleHTTPServer 8080'
+#end
