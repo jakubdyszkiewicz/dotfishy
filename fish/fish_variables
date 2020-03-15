@@ -4,6 +4,7 @@ SETUVAR FZF_DEFAULT_OPTS:\x0a\x20\x20\x2d\x2dcolor\x20light\x0a\x20\x20
 SETUVAR __fish_init_2_39_8:\x1d
 SETUVAR __fish_init_2_3_0:\x1d
 SETUVAR __fish_init_3_x:\x1d
+SETUVAR __kube_ps_enabled:1
 SETUVAR _fish_abbr_cls:clear
 SETUVAR _fish_abbr_cx:chmod\x20\x2bx
 SETUVAR _fish_abbr_g:git
@@ -27,6 +28,14 @@ SETUVAR _fish_abbr_gri:git\x20rebase\x20\x2d\x2dinteractive
 SETUVAR _fish_abbr_gro:git\x20reset\x20\x2d\x2dhard\x20origin/master
 SETUVAR _fish_abbr_gs:git\x20status
 SETUVAR _fish_abbr_gst:git\x20stash
+SETUVAR _fish_abbr_kc:kubectl
+SETUVAR _fish_abbr_kca:kubectl\x20apply\x20\x2df
+SETUVAR _fish_abbr_kcp:kubectl\x20get\x20pods\x20\x2d\x2dall\x2dnamespaces
+SETUVAR _fish_abbr_km:kumactl
+SETUVAR _fish_abbr_kma:kumactl\x20apply\x20\x2df
+SETUVAR _fish_abbr_kmc:kumactl
+SETUVAR _fish_abbr_kn:kubens
+SETUVAR _fish_abbr_ks:kubens
 SETUVAR _fish_abbr_postgres__start:pg_ctl\x20\x2dD\x20/usr/local/var/postgres\x20\x2dl\x20/usr/local/var/postgres/server\x2elog\x20start
 SETUVAR _fish_abbr_postgres__stop:pg_ctl\x20\x2dD\x20/usr/local/var/postgres\x20stop\x20\x2ds\x20\x2dm\x20fast
 SETUVAR _fish_abbr_pserv:python\x20\x2dm\x20SimpleHTTPServer\x208080

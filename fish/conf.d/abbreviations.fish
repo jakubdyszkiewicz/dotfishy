@@ -31,4 +31,11 @@
   abbr psg 'ps aux | grep'
 
   abbr pserv 'python -m SimpleHTTPServer 8080'
+
+  abbr km 'kumactl'
+  abbr kma 'kumactl apply -f'
+  abbr kc 'kubectl'
+  abbr kca 'kubectl apply -f'
+  abbr ks 'kubens'
+  abbr kcp 'kubectl get pods --all-namespaces'
 #end

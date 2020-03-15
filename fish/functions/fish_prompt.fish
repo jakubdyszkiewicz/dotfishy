@@ -37,12 +37,12 @@ function __simple_ass_prompt_git -d "Display the actual git branch"
   set -l is_dot_git (string match '*/.git' $std_prompt)
 
   if git_is_repo; and test -z $is_dot_git
-    printf 'on '
-    set_color purple
+   printf ' on '
+   set_color purple
 
-    set -l git_branch (command git symbolic-ref --quiet --short HEAD 2> /dev/null; or git rev-parse --short HEAD 2> /dev/null; or echo -n '(unknown)')
+   set -l git_branch (command git symbolic-ref --quiet --short HEAD 2> /dev/null; or git rev-parse --short HEAD 2> /dev/null; or echo -n '(unknown)')
 
-    printf '%s ' $git_branch
+   printf '%s ' $git_branch
 
     set state (__simple_ass_prompt_parse_git_branch_state)
     set_color blue
@@ -76,7 +76,7 @@ end
 # Get Project Working Directory
 function __simple_ass_prompt_pwd -d "Get PWD"
   set_color $fish_color_cwd
-  printf '%s ' (pwd)
+  printf '%s' (pwd)
 end
 
 # Simple-ass-prompt
@@ -102,6 +102,9 @@ function fish_prompt
 
   # Git info
   __simple_ass_prompt_git
+
+  # Kubernetes
+  printf ' with '(set_color blue)(__kube_prompt)(set_color normal)
 
   # Line 2
   echo
