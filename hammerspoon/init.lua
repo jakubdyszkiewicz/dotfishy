@@ -271,5 +271,11 @@ function caffeinateCallback(eventType)
     end
 end
 
+hs.hotkey.bind(hyper, '9', function()
+	disconnectBluetooth()
+	hs.timer.usleep(1000)
+	connectBluetooth()
+end)
+
 caffeinateWatcher = hs.caffeinate.watcher.new(caffeinateCallback)
 caffeinateWatcher:start()
