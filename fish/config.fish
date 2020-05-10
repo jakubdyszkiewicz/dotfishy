@@ -14,4 +14,6 @@ set -gx KUMA_REPORTS_ENABLED false
 set -gx PATH $HOME/kong/kuma/build/artifacts-darwin-amd64/kumactl/ $PATH
 set -gx PATH $HOME/kong/kuma/build/artifacts-darwin-amd64/kuma-dp/ $PATH
 set -gx PATH /usr/local/opt/go@1.12/bin $PATH
+set -gx GOPATH $HOME/go
+set -gx PATH $GOPATH/bin $PATH
 alias c="bat"

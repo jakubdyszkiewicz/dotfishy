@@ -25,10 +25,10 @@ appMaps = {
 	e = 'Goland',
 	r = 'ForkLift',
 	d = 'iTerm',
-	x = 'Bear',
+	b = 'Bear',
 	z = 'Spotify',
 	t = 'Todoist',
-  	b = 'Calendar'
+  	x = 'Calendar'
 }
 
 for appKey, appName in pairs(appMaps) do
@@ -37,24 +37,9 @@ for appKey, appName in pairs(appMaps) do
 	end)	
 end
 
--- Hints
-hs.hints.hintChars = {'A', 'S', 'D', 'J', 'K', 'L', 'Q', 'W', 'E', 'U', 'I', 'O'}
-hs.grid.HINTS = {
-	{ "f1", "f2", "f3", "f4", "f5", "f6", "f7", "f8", "f9", "f10" },
-	{ "1", "2", "3", "4", "5", "6", "7", "8", "9", "0" },
-	{ "Q", "W", "E", "U", "I", "O", "U", "I", "O", "P" },
-	{ "A", "S", "D", "J", "K", "L", "J", "K", "L", ";" },
-	{ "Z", "X", "C", "V", "B", "N", "M", ",", ".", "/" }
-}
-hs.hints.showTitleThresh = 0
-
-hs.hotkey.bind(hyper, 'y', function()
-	hs.hints.windowHints()
-end)
-
 -- Grid
 hs.grid.setMargins(hs.geometry.size(0,0))
-hs.grid.setGrid'6x2'
+hs.grid.setGrid('6x2')
 
 hs.hotkey.bind(hyper,'g',function()
 	hs.grid.show()
@@ -165,11 +150,22 @@ end)
 
 
 -- Audio
+function switchAudio(name)
+	hs.alert('Switching to: ' .. name)
+	device = hs.audiodevice.findDeviceByName(name)
+	if device ~= nil then
+		device:setDefaultOutputDevice()
+	end
+	hs.alert('Active: ' .. hs.audiodevice.current().name)
+end
+
 hs.hotkey.bind(hyper, '1', function()
-	hs.audiodevice.findDeviceByName('MacBook Pro Speakers'):setDefaultOutputDevice()
+	switchAudio('MacBook Pro Speakers')
+	switchAudio('Built-in Output')
 end)
 
 hs.hotkey.bind(hyper, '2', function()
+	hs.alert('WH-1000XM3')
 	-- hs.audiodevice.findDeviceByName('WH-1000XM3'):setDefaultOutputDevice()
 	-- there is some bug with Sonys to be selected. Fallback to applescript
 	done = hs.osascript.applescript([[
@@ -183,17 +179,22 @@ end tell
 end)
 
 hs.hotkey.bind(hyper, '3', function()
-	hs.audiodevice.findDeviceByName('External Headphones'):setDefaultOutputDevice()
+	switchAudio('External Headphones')
 end)
 
 hs.hotkey.bind(hyper, '4', function()
-	hs.audiodevice.findDeviceByName('(8D)Logitech Adapter'):setDefaultOutputDevice()
+	switchAudio('(8D)Logitech Adapter')
 end)
 
 hs.hotkey.bind(hyper, '5', function()
-	hs.audiodevice.findDeviceByName('Scarlett 2i2 USB'):setDefaultOutputDevice()
+	switchAudio('Scarlett 2i2 USB')
 end)
 
+-- Spotify +/-
+hs.hotkey.bind(hyper, '-', hs.spotify.volumeDown)
+hs.hotkey.bind(hyper, '=', hs.spotify.volumeUp)
+
+-- Clicking on notifications
 hs.hotkey.bind(hyper, '0', function()
 	done = hs.osascript.applescript([[
 my closeNotif()
@@ -202,15 +203,33 @@ on closeNotif()
 	tell application "System Events"
 		tell process "NotificationCenter"
 			set theWindows to every window
-			repeat with i from 1 to number of items in theWindows
-				set this_item to item i of theWindows
-				try
-					click button 1 of this_item
-				on error
-					
-					my closeNotif()
-				end try
-			end repeat
+			set this_item to item 1 of theWindows
+			try
+				click button 1 of this_item
+			on error
+				my closeNotif()
+			end try
+		end tell
+	end tell
+	
+end closeNotif
+	]])
+end)
+
+hs.hotkey.bind(hyper, '9', function()
+	done = hs.osascript.applescript([[
+my closeNotif()
+on closeNotif()
+	
+	tell application "System Events"
+		tell process "NotificationCenter"
+			set theWindows to every window
+			set this_item to item 1 of theWindows
+			try
+				click button 2 of this_item
+			on error
+				my closeNotif()
+			end try
 		end tell
 	end tell
 	
@@ -237,45 +256,47 @@ myWatcher = hs.pathwatcher.new(os.getenv("HOME") .. "/.hammerspoon/", reloadConf
 
 -- https://github.com/wangshub/hammerspoon-config/blob/master/headphone/headphone.lua
 -- SONY MDR-1000X
-local bleDeviceID = '38-18-4c-19-2b-db'
+local sonyBluetoothDeviceID = '38-18-4c-19-2b-db'
 
-
-function bluetoothSwitch(state)
-  -- state: 0(off), 1(on)
-  cmd = "/usr/local/bin/blueutil --power "..(state)
-  print(cmd)
+function disconnectBluetooth(deviceID)
+  hs.alert('Disconnecting Sonys')
+  cmd = "/usr/local/bin/blueutil --disconnect "..(deviceID)
   result = hs.osascript.applescript(string.format('do shell script "%s"', cmd))
 end
 
-function disconnectBluetooth()
-  cmd = "/usr/local/bin/blueutil --disconnect "..(bleDeviceID)
-  result = hs.osascript.applescript(string.format('do shell script "%s"', cmd))
-end
-
-function connectBluetooth()
-  cmd = "/usr/local/bin/blueutil --connect "..(bleDeviceID)
+function connectBluetooth(deviceID)
+  hs.alert('Connecting Sonys')
+  cmd = "/usr/local/bin/blueutil --connect "..(deviceID)
   result = hs.osascript.applescript(string.format('do shell script "%s"', cmd))
 end
 
 function caffeinateCallback(eventType)
     if (eventType == hs.caffeinate.watcher.screensDidSleep) then
-      print("screensDidSleep")
-	  disconnectBluetooth()
+	  disconnectBluetooth(sonyBluetoothDeviceID)
     elseif (eventType == hs.caffeinate.watcher.screensDidWake) then
-      print("screensDidWake")
-	  connectBluetooth()
-    elseif (eventType == hs.caffeinate.watcher.screensDidLock) then
-      print("screensDidLock")
-    elseif (eventType == hs.caffeinate.watcher.screensDidUnlock) then
-      print("screensDidUnlock")
+	  connectBluetooth(sonyBluetoothDeviceID)
     end
 end
 
-hs.hotkey.bind(hyper, '9', function()
-	disconnectBluetooth()
+hs.hotkey.bind(hyper, '6', function()
+	connectBluetooth(sonyBluetoothDeviceID)
+end)
+
+hs.hotkey.bind(hyper, '7', function()
+	disconnectBluetooth(sonyBluetoothDeviceID)
+end)
+
+hs.hotkey.bind(hyper, '8', function()
+	disconnectBluetooth(sonyBluetoothDeviceID)
 	hs.timer.usleep(1000)
-	connectBluetooth()
+	connectBluetooth(sonyBluetoothDeviceID)
 end)
 
 caffeinateWatcher = hs.caffeinate.watcher.new(caffeinateCallback)
 caffeinateWatcher:start()
+
+--- DEBUG
+function printTable(result)
+	for i,v in ipairs(result) do print(i,v) end
+end
+
