@@ -8,6 +8,8 @@ set -gx GOPATH $HOME/go
 set -gx PATH $GOPATH/bin $PATH
 alias c="bat"
 
+set fish_greeting # disable intro message
+
 # Rewrite Fisher installation path to not mix my files with Fisher files
 set -g fisher_path $HOME/.config/fish/fisher
 

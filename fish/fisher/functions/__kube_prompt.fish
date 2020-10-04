@@ -53,5 +53,5 @@ function __kube_prompt
   end
 
   __kube_ps_update_cache
-  echo -n -s " (⎈ $__kube_ps_context|$__kube_ps_namespace)"
+  echo -n -s "($__kube_ps_context|$__kube_ps_namespace)"
 end
