@@ -1,6 +1,4 @@
-set -gx FZF_DEFAULT_OPTS '
-    --color light
-'
+set -gx FZF_DEFAULT_OPTS '--color light'
 
 set fish_color_autosuggestion 93a1a1
 set fish_color_cancel -r

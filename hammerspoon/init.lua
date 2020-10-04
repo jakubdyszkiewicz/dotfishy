@@ -292,6 +292,12 @@ hs.hotkey.bind(hyper, '8', function()
 	connectBluetooth(sonyBluetoothDeviceID)
 end)
 
+hs.timer.doEvery(10, function()
+    if (hs.audiodevice.current().device:balance() ~= 0.5) then
+        hs.audiodevice.current().device:setBalance(0.5)
+    end
+end)
+
 caffeinateWatcher = hs.caffeinate.watcher.new(caffeinateCallback)
 caffeinateWatcher:start()
 
