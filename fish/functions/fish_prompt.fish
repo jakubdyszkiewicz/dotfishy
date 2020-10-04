@@ -104,7 +104,9 @@ function fish_prompt
   __simple_ass_prompt_git
 
   # Kubernetes
-  printf ' with '(set_color blue)(__kube_prompt)(set_color normal)
+  if type -q kubectl
+    printf ' with '(set_color blue)(__kube_prompt)(set_color normal)
+  end
 
   # Line 2
   echo
