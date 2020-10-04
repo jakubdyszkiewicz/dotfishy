@@ -57,11 +57,12 @@ if [ ! -f /usr/local/go/bin/go ]; then
     tar -xvf go1.15.2.linux-amd64.tar.gz
     mv go /usr/local
 
-    if ! grep -q GOROOT "$HOME/.bashrc"; then
-        echo 'export GOROOT=/usr/local/go' >> $HOME/.profile
-        echo 'export GOPATH=$HOME/go' >> $HOME/.profile
-        echo 'export PATH=$GOPATH/bin:$GOROOT/bin:$PATH' >> $HOME/.profile
-    fi
+    # if ! grep -q GOROOT "$HOME/.bashrc"; then
+    #     echo 'export GOROOT=/usr/local/go' >> $HOME/.profile
+    #     echo 'export GOPATH=$HOME/go' >> $HOME/.profile
+    #     echo 'export PATH=$GOPATH/bin:$GOROOT/bin:$PATH' >> $HOME/.profile
+    # fi
+    ln -s /usr/local/go/bin/go /usr/local/bin/go
     echo "😎 Go installed"
 else
     echo "😎 Go already installed"
