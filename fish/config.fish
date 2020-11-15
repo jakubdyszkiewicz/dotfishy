@@ -4,9 +4,15 @@ set -gx PATH $HOME/bin $PATH
 set -gx KUMA_REPORTS_ENABLED false
 set -gx PATH $HOME/kong/kuma/build/artifacts-darwin-amd64/kumactl/ $PATH
 set -gx PATH $HOME/kong/kuma/build/artifacts-darwin-amd64/kuma-dp/ $PATH
+set -gx PATH $HOME/kong/kuma/build/artifacts-darwin-amd64/kuma-cp/ $PATH
 set -gx GOPATH $HOME/go
 set -gx PATH $GOPATH/bin $PATH
+set -gx CLOUDSDK_PYTHON python2
 alias c="bat"
+
+set -gx Z_DATA $HOME/.local/share/z/data
+set -gx Z_DATA_DIR $HOME/.local/share/z
+set -gx Z_EXCLUDE \x5e/$HOME\x24
 
 set fish_greeting # disable intro message
 
