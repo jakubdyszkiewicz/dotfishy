@@ -306,3 +306,33 @@ function printTable(result)
 	for i,v in ipairs(result) do print(i,v) end
 end
 
+local open = io.open
+local notiFile = "/tmp/test"
+
+--- Notification from file tracking
+local fileWatcher = hs.pathwatcher.new(notiFile, function(_, eventType)
+	content = read_file(notiFile)
+	if content~=nil then
+		hs.notify.show(content, "", "")
+		os.remove(notiFile)
+	end
+end)
+fileWatcher:start()
+
+local function read_file(path)
+    local file = open(path, "rb") -- r read mode and b binary mode
+    if not file then return nil end
+    local content = file:read "*a" -- *a or *all reads the whole file
+    file:close()
+    return content
+end
+
+function file_exists(name)
+	local f=io.open(name,"r")
+	if f~=nil then
+		io.close(f)
+		return true
+	else
+		return false
+	end
+end
