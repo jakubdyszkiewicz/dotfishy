@@ -309,15 +309,6 @@ end
 local open = io.open
 local notiFile = "/tmp/test"
 
---- Notification from file tracking
-local fileWatcher = hs.pathwatcher.new(notiFile, function(_, eventType)
-	content = read_file(notiFile)
-	if content~=nil then
-		hs.notify.show(content, "", "")
-		os.remove(notiFile)
-	end
-end)
-fileWatcher:start()
 
 local function read_file(path)
     local file = open(path, "rb") -- r read mode and b binary mode
@@ -336,3 +327,13 @@ function file_exists(name)
 		return false
 	end
 end
+
+--- Notification from file tracking
+local fileWatcher = hs.pathwatcher.new(notiFile, function(_, eventType)
+	content = read_file(notiFile)
+	if content~=nil then
+		hs.notify.show(content, "", "")
+		os.remove(notiFile)
+	end
+end)
+fileWatcher:start()
