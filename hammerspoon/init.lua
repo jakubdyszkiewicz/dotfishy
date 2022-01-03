@@ -18,7 +18,7 @@ end
 -- Application mappings
 appMaps = {
 	f = 'Google Chrome',
-	c = 'Caprine',
+	c = 'Messenger',
 	v = 'Visual Studio Code',
 	a = 'HipChat',
 	s = 'Slack',
