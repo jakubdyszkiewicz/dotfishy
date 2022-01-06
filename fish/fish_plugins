@@ -1,0 +1,4 @@
+# fishpkg/fish-git-util <- it was deleted, but I still keep git_* functions
+aluxian/fish-kube-prompt
+evanlucas/fish-kubectl-completions
+jethrokuan/z
