@@ -21,16 +21,14 @@
   abbr gst 'git stash'
   abbr gbi 'git rebase --interactive'
   abbr gro 'git reset --hard origin/master'
+  abbr grh 'git reset --hard HEAD'
 
   abbr cls 'clear'
   abbr cx 'chmod +x'
 
-  abbr postgres_start 'pg_ctl -D /usr/local/var/postgres -l /usr/local/var/postgres/server.log start'
-  abbr postgres_stop 'pg_ctl -D /usr/local/var/postgres stop -s -m fast'
-
   abbr psg 'ps aux | grep'
 
-  abbr pserv 'python -m SimpleHTTPServer 8080'
+  abbr pserv 'python3 -m http.server 8080'
 
   abbr km 'kumactl'
   abbr kma 'kumactl apply -f'
@@ -38,4 +36,6 @@
   abbr kca 'kubectl apply -f'
   abbr ks 'kubens'
   abbr kcp 'kubectl get pods --all-namespaces'
+
+  abbr dps 'docker ps'
 #end
