@@ -105,7 +105,7 @@ function fish_prompt
 
   # Kubernetes
   if type -q kubectl
-    printf ' with '(set_color blue)(__kube_prompt)(set_color normal)
+    printf ' with'(set_color blue)(__kube_prompt)(set_color normal)
   end
 
   # Line 2
