@@ -1,4 +1,5 @@
-local log = hs.logger.new('mymodule','debug')
+log = hs.logger.new('mymodule','debug')
+-- example: log:i("test")
 
 -- Settings
 hs.window.animationDuration = 0.00
@@ -6,7 +7,7 @@ hs.window.animationDuration = 0.00
 -- Keys
 hyper = {'cmd', 'alt', 'ctrl', 'shift'}
 
--- Empty hyper keys: W, Q (buggy), space
+-- Empty hyper keys: W, Q (buggy), space, numbers, FX
 
 -- Application mappings
 appMaps = {
@@ -27,7 +28,7 @@ appMaps = {
 for appKey, appName in pairs(appMaps) do
 	hs.hotkey.bind(hyper, appKey, function()
 		hs.application.launchOrFocus(appName)
-	end)	
+	end)
 end
 
 -- Grid
@@ -54,7 +55,7 @@ hs.hotkey.bind(hyper, 'tab', function()
 	win:moveToScreen(nextScreen)
 end)
 
--- Flow
+-- Flow (general)
 hs.hotkey.bind(hyper, 'return', function()
 	if hs.screen.mainScreen():name() == "Built-in Retina Display" then
 		fullscreenAllWindows()
@@ -78,6 +79,17 @@ hs.hotkey.bind(hyper, 'return', function()
 	end
 end)
 
+-- Flow (dev)
+hs.hotkey.bind(hyper, '0', function()
+	adjustWindowsOfApp('Code', '0,0 3x2')
+	adjustWindowsOfApp('GoLand', '0,0 3x2')
+	adjustWindowsOfApp('iTerm2', '3,0 3x2')
+	adjustWindowsOfApp('Google Chrome', '3,0 3x2')
+
+	focusIfLaunched('iTerm2')
+	focusIfLaunched('GoLand')
+end)
+
 function fullscreenAllWindows()
 	for i, win in ipairs(hs.window:allWindows()) do
 		hs.grid.set(win, '0,0 6x4')
@@ -94,6 +106,13 @@ function adjustWindowsOfApp(appName, gridSettings)
 		for i, win in ipairs(wins) do
 			hs.grid.set(win, gridSettings)
 		end
+	end
+end
+
+function focusIfLaunched(appName)
+	local app = hs.application.get(appName)
+	if app then
+		app:activate()
 	end
 end
 
@@ -161,9 +180,6 @@ function reloadConfig(files)
 end
 myWatcher = hs.pathwatcher.new(os.getenv("HOME") .. "/.hammerspoon/", reloadConfig):start()
 
-
-
-
 -- https://github.com/wangshub/hammerspoon-config/blob/master/headphone/headphone.lua
 -- SONY MDR-1000X
 local sonyBluetoothDeviceID = '38-18-4c-19-2b-db'
@@ -188,11 +204,11 @@ function caffeinateCallback(eventType)
     end
 end
 
-hs.hotkey.bind(hyper, '9', function()
+hs.hotkey.bind(hyper, '8', function()
 	connectBluetooth(sonyBluetoothDeviceID)
 end)
 
-hs.hotkey.bind(hyper, '0', function()
+hs.hotkey.bind(hyper, '9', function()
 	disconnectBluetooth(sonyBluetoothDeviceID)
 end)
 
