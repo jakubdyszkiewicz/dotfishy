@@ -64,19 +64,17 @@ hs.hotkey.bind(hyper, 'return', function()
 		adjustWindowsOfApp('Code', '0,0 3x2')
 		adjustWindowsOfApp('GoLand', '0,0 3x2')
 
-		-- Right half
-		adjustWindowsOfApp('iTerm2', '3,0 3x2')
-
 		-- Upper corner
 		adjustWindowsOfApp('Spotify', '3,0 3x1')
 		adjustWindowsOfApp('Bear', '3,0 3x1')
-		adjustWindowsOfApp('Things3', '4,0 2x1')
-		adjustWindowsOfApp('Calendar', '4,0 2x1')
-
+		adjustWindowsOfApp('Things', '3,0 3x1')
+		adjustWindowsOfApp('Calendar', '3,0 3x1')
+		
 		-- Down corner
 		adjustWindowsOfApp('Messenger', '3,2 3x1')
 		adjustWindowsOfApp('Slack', '3,2 3x1')
 		adjustWindowsOfApp('Discord', '3,2 3x1')
+		adjustWindowsOfApp('iTerm2', '3,2 3x1')
 	end
 end)
 
