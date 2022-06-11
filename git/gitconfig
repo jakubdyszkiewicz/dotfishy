@@ -6,7 +6,7 @@
     glog = log --pretty=format:'%C(yellow)%h %Cred%ad %Cblue%an%Cgreen%d %Creset%s' --date=iso --graph
     gloga = log --pretty=format:'%C(yellow)%h %Cred%ad %Cblue%an%Cgreen%d %Creset%s' --date=iso --graph --all
 [init]
-	templatedir = /Users/jakob/.git-templates
+	templatedir = /Users/jakub/.git-templates
 [push]
     default = current
 [includeIf "gitdir:~/allegro/*"]

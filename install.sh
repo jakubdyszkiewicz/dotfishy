@@ -104,3 +104,6 @@ link_file $rootDir/vscode/settings.json "$HOME/Library/Application Support/Code/
 echo ">> Install sshrc"
 link_file $rootDir/sshrc/.sshrc ~/.sshrc
 link_file $rootDir/sshrc/.sshrc.d ~/.sshrc.d
+
+echo ">>> Install FZF completion for fish"
+/opt/Homebrew/opt/fzf/install
