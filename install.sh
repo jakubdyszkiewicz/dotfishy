@@ -81,10 +81,6 @@ echo ">> Install Karabiner component"
 link_file $rootDir/karabiner ~/.config/karabiner
 echo ""
 
-echo ">> Install BetterTouchTools component"
-link_file $rootDir/bettertouchtool/.btt_autoload_preset.json ~/.btt_autoload_preset.json
-echo ""
-
 echo ">> Install Git component"
 echo ">>> Install gitconfig"
 link_file $rootDir/git/gitconfig ~/.gitconfig
@@ -100,10 +96,6 @@ link_file $rootDir/vim/solarized.vim ~/.vim/colors/solarized.vim
 
 echo ">> Installing Visual Studio Code settings"
 link_file $rootDir/vscode/settings.json "$HOME/Library/Application Support/Code/User/settings.json"
-
-echo ">> Install sshrc"
-link_file $rootDir/sshrc/.sshrc ~/.sshrc
-link_file $rootDir/sshrc/.sshrc.d ~/.sshrc.d
 
 echo ">>> Install FZF completion for fish"
 /opt/Homebrew/opt/fzf/install

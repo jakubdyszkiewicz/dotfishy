@@ -34,10 +34,6 @@ Run `./install.sh` again.
 
 ## Components
 
-### BetterTouchTool
-* Hyper+Q/W to change tabs
-* Trackpad multiple finger swiping
-
 ### Homebrew
 * Installs tools, apps using `cask` and apps from App Store using `mas`.
 
