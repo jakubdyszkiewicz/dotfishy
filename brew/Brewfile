@@ -6,6 +6,7 @@ tap "homebrew/core"
 tap "homebrew/services"
 brew "ansible"
 brew "bat"
+brew "pkg-config"
 brew "ffmpeg"
 brew "fish"
 brew "fzf"
@@ -17,8 +18,9 @@ brew "gradle"
 brew "htop"
 brew "httpie"
 brew "jq"
+brew "mas"
 brew "maven"
-brew "node"
+brew "node", link: false
 brew "rust"
 brew "sha2"
 brew "sift"
@@ -44,7 +46,20 @@ cask "raycast"
 cask "slack"
 cask "spotify"
 cask "steam"
+cask "the-unarchiver"
 cask "transmission"
 cask "visual-studio-code"
 cask "vlc"
-cask "wireshark"
+mas "Affinity Photo", id: 824183456
+mas "Amphetamine", id: 937984704
+mas "Bear", id: 1091189122
+mas "Brother iPrint&Scan", id: 1193539993
+mas "Disk Speed Test", id: 425264550
+mas "GarageBand", id: 682658836
+mas "iMovie", id: 408981434
+mas "iStat Menus", id: 1319778037
+mas "Kindle", id: 405399194
+mas "Messenger", id: 1480068668
+mas "Numbers", id: 409203825
+mas "Pages", id: 409201541
+mas "Things", id: 904280696
