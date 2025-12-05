@@ -12,7 +12,8 @@ hyper = {'cmd', 'alt', 'ctrl', 'shift'}
 -- Application mappings
 appMaps = {
 	f = 'Google Chrome',
-	c = 'Messenger',
+	c = 'ChatGPT',
+	m = 'Messenger',
 	v = 'Visual Studio Code',
 	a = 'Discord',
 	s = 'Slack',
@@ -135,32 +136,72 @@ end)
 
 -- Audio
 function switchAudio(name)
-	hs.alert('Switching to: ' .. name)
-	device = hs.audiodevice.findDeviceByName(name)
-	if device ~= nil then
-		device:setDefaultOutputDevice()
-	end
-	hs.alert('Active: ' .. hs.audiodevice.current().name)
+	local task = hs.task.new(
+    "/opt/homebrew/bin/SwitchAudioSource",
+    function(exitCode, stdOut, stdErr)
+      if exitCode == 0 then
+        hs.alert("Switched audio to "..name)
+      else
+        hs.alert("Failed to switch audio to "..name)
+      end
+    end,
+    {"-s", name}
+  )
+
+  task:start()
 end
+
+function connectBluetooth(deviceID, deviceName, successCallback)
+	local task = hs.task.new(
+    "/opt/homebrew/bin/blueutil",
+    function(exitCode, stdOut, stdErr)
+      if exitCode == 0 then
+        hs.alert("Connected Bluetooth device: "..deviceName)
+		successCallback()
+      else
+        hs.alert("Failed to connect Bluetooth device: "..deviceName)
+		hs.printf("blueutil error: %s", stdErr)
+      end
+    end,
+    {"--connect", deviceID}
+  )
+
+  task:start()
+end
+
+function disconnectBluetooth(deviceID)
+	local task = hs.task.new(
+    "/opt/homebrew/bin/blueutil",
+    function(exitCode, stdOut, stdErr)
+      if exitCode ~= 0 then
+		hs.printf("blueutil error: %s", stdErr)
+      end
+    end,
+    {"--disconnect", deviceID}
+  )
+
+  task:start()
+end
+
+local sonyBluetoothDeviceID = '38-18-4c-19-2b-db'
+local airPodsBluetoothDeviceID = '18-3f-70-52-5a-09'
 
 hs.hotkey.bind(hyper, '1', function()
 	switchAudio('MacBook Pro Speakers')
-	switchAudio('Built-in Output')
+	disconnectBluetooth(airPodsBluetoothDeviceID)
+	disconnectBluetooth(sonyBluetoothDeviceID)
 end)
 
 hs.hotkey.bind(hyper, '2', function()
-	hs.alert('WH-1000XM3')
-	-- hs.audiodevice.findDeviceByName('WH-1000XM3'):setDefaultOutputDevice()
-	-- there is some bug with Sonys to be selected :(
+	connectBluetooth(airPodsBluetoothDeviceID, 'AirPods', function() switchAudio('Jacob’s AirPods Pro') end)
+	disconnectBluetooth(sonyBluetoothDeviceID)
 end)
 
 hs.hotkey.bind(hyper, '3', function()
-	switchAudio('External Headphones')
+	connectBluetooth(sonyBluetoothDeviceID, 'WH-1000XM3', function() switchAudio('WH-1000XM3') end)
+	disconnectBluetooth(airPodsBluetoothDeviceID)
 end)
 
-hs.hotkey.bind(hyper, '4', function()
-	switchAudio('Scarlett 2i2 USB')
-end)
 
 -- Spotify +/-
 hs.hotkey.bind(hyper, '-', hs.spotify.volumeDown)
@@ -180,40 +221,20 @@ function reloadConfig(files)
 end
 myWatcher = hs.pathwatcher.new(os.getenv("HOME") .. "/.hammerspoon/", reloadConfig):start()
 
--- https://github.com/wangshub/hammerspoon-config/blob/master/headphone/headphone.lua
--- SONY MDR-1000X
-local sonyBluetoothDeviceID = '38-18-4c-19-2b-db'
-
-function disconnectBluetooth(deviceID)
-  hs.alert('Disconnecting Sonys')
-  cmd = "/usr/local/bin/blueutil --disconnect "..(deviceID)
-  result = hs.osascript.applescript(string.format('do shell script "%s"', cmd))
-end
-
-function connectBluetooth(deviceID)
-  hs.alert('Connecting Sonys')
-  cmd = "/usr/local/bin/blueutil --connect "..(deviceID)
-  result = hs.osascript.applescript(string.format('do shell script "%s"', cmd))
-end
-
+local audioBeforeSleep = ''
 function caffeinateCallback(eventType)
     if (eventType == hs.caffeinate.watcher.screensDidSleep) then
-	  disconnectBluetooth(sonyBluetoothDeviceID)
+	    audioBeforeSleep = hs.audiodevice.current().name
+	    disconnectBluetooth(sonyBluetoothDeviceID)
     elseif (eventType == hs.caffeinate.watcher.screensDidWake) then
-	  connectBluetooth(sonyBluetoothDeviceID)
+		if audioBeforeSleep == 'WH-1000XM3' then
+	    	connectBluetooth(sonyBluetoothDeviceID, 'WH-1000XM3', function() switchAudio('WH-1000XM3') end)
+		end
     end
 end
 
-hs.hotkey.bind(hyper, '8', function()
-	connectBluetooth(sonyBluetoothDeviceID)
-end)
-
-hs.hotkey.bind(hyper, '9', function()
-	disconnectBluetooth(sonyBluetoothDeviceID)
-end)
-
 -- Fix for MacOS behavior of messing up balance of bluetooth headphones
-hs.timer.doEvery(10, function()
+hs.timer.doEvery(60, function()
     if (hs.audiodevice.current().device:balance() ~= 0.5) then
         hs.audiodevice.current().device:setBalance(0.5)
     end

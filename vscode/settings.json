@@ -1,6 +1,17 @@
 {
-    "workbench.colorTheme": "Solarized Light",
-    "window.zoomLevel": 0,
     "C_Cpp.updateChannel": "Insiders",
-    "explorer.confirmDragAndDrop": false
+    "explorer.confirmDragAndDrop": false,
+    "window.zoomLevel": 1,
+    "editor.inlineSuggest.enabled": true,
+    "editor.minimap.enabled": false,
+    "files.autoSave": "afterDelay",
+    "workbench.colorTheme": "Solarized Light",
+    "github.copilot.editor.enableAutoCompletions": true,
+    "github.copilot.enable": {
+        "*": false,
+        "plaintext": false,
+        "markdown": false,
+        "scminput": false
+    },
+    "github.copilot.nextEditSuggestions.enabled": true
 }

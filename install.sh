@@ -37,7 +37,7 @@ echo ""
 echo ">> Install Homebrew component"
 if ! which brew > /dev/null; then
     echo ">>> Installing Homebrew..."
-    /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 else
     echo ">>> Homebrew already installed. Running: brew update"
     brew update
@@ -51,13 +51,13 @@ cd $rootDir
 echo ">> Apply fish shell"
 currentShell=`basename $SHELL`
 if [ $currentShell != 'fish' ]; then
-    if grep -q "/usr/local/bin/fish" "/etc/shells"; then
+    if grep -q "/opt/homebrew/bin/fish" "/etc/shells"; then
         echo "Fish already in /etc/shells"
     else
         echo "Adding fish to /etc/shells (requires sudo)"
-        sudo "/usr/local/bin/fish" >> "/etc/shells"
+        sudo sh -c "echo '/opt/homebrew/bin/fish' >> /etc/shells"
         echo "Changing shell to fish"
-        chsh --shell $(which fish)
+        chsh -s /opt/homebrew/bin/fish
     fi
 else
     echo "Fish already set as default shell"

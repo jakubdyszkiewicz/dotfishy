@@ -25,9 +25,10 @@ Before wiping your Mac, check those:
 6. Run `cd ~/.dotfishy && ./install.sh` to start installation
 
 #### Extra steps
-* iTerm - Go to `General` -> `Preferences` -> `Load preferences from custom folder` -> pick `iterm`
+* iTerm - Go to `General` -> `Preferences` -> `Load preferences from custom folder` -> pick `iterm` (cmd+shift+dot to show hidden files)
 * Chrome - cVim options https://gist.github.com/jakubdyszkiewicz/f6bbb523c7e383525afa276f9f060680
 * Setup IntelliJ settings sync
+* Switch Spotlight to Raycast and import the settings
 
 ## Updating
 Run `./install.sh` again.

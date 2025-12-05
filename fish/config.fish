@@ -1,6 +1,6 @@
 #set -gx JAVA_HOME /Library/Java/JavaVirtualMachines/openjdk-12.0.1.jdk/Contents/Home
 set -gx PATH /usr/local/bin $PATH 
-set -gx PATH /opt/Homebrew/bin $PATH
+set -gx PATH /opt/homebrew/bin $PATH
 set -gx PATH $HOME/bin $PATH
 set -gx KUMA_REPORTS_ENABLED false
 set -gx PATH $HOME/kong/kuma/build/artifacts-darwin-amd64/kumactl/ $PATH
@@ -26,3 +26,6 @@ set -p fish_complete_path fish_complete_path[1] $fisher_path/completions
 for file in $fisher_path/conf.d/*.fish
     builtin source $file 2>/dev/null
 end
+
+# Created by `pipx` on 2024-12-19 19:36:02
+set PATH $PATH /Users/jakub/.local/bin
