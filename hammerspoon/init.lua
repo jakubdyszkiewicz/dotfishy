@@ -7,29 +7,22 @@ hs.window.animationDuration = 0.00
 -- Keys
 hyper = {'cmd', 'alt', 'ctrl', 'shift'}
 
--- Empty hyper keys: W, Q (buggy), space, numbers, FX
+local function readProfile()
+    local path = os.getenv("HOME") .. "/.dotfishy/profile"
+    local f = io.open(path, "r")
+    if not f then return nil end
+    local value = f:read("*l")
+    f:close()
+    return value
+end
 
--- Application mappings
-appMaps = {
-	f = 'Google Chrome',
-	c = 'ChatGPT',
-	m = 'Messenger',
-	v = 'Visual Studio Code',
-	a = 'Discord',
-	s = 'Slack',
-	e = 'Goland',
-	r = 'ForkLift',
-	d = 'iTerm',
-	b = 'Bear',
-	z = 'Spotify',
-	t = 'Things3',
-  	x = 'Calendar'
-}
+local profile = readProfile()
 
-for appKey, appName in pairs(appMaps) do
-	hs.hotkey.bind(hyper, appKey, function()
-		hs.application.launchOrFocus(appName)
-	end)
+if profile == "work" then
+	dofile(hs.configdir .. "/work.lua")
+end
+if profile == "priv" then
+	dofile(hs.configdir .. "/priv.lua")
 end
 
 -- Grid
@@ -55,67 +48,6 @@ hs.hotkey.bind(hyper, 'tab', function()
 	local nextScreen = win:screen():next()
 	win:moveToScreen(nextScreen)
 end)
-
--- Flow (general)
-hs.hotkey.bind(hyper, 'return', function()
-	if hs.screen.mainScreen():name() == "Built-in Retina Display" then
-		fullscreenAllWindows()
-	else -- 4K 32" screen
-		-- Left half
-		adjustWindowsOfApp('Google Chrome', '0,0 3x2')
-		adjustWindowsOfApp('Code', '0,0 3x2')
-		adjustWindowsOfApp('GoLand', '0,0 3x2')
-
-		-- Upper corner
-		adjustWindowsOfApp('Spotify', '3,0 3x1')
-		adjustWindowsOfApp('Bear', '3,0 3x1')
-		adjustWindowsOfApp('Things', '3,0 3x1')
-		adjustWindowsOfApp('Calendar', '3,0 3x1')
-		
-		-- Down corner
-		adjustWindowsOfApp('Messenger', '3,2 3x1')
-		adjustWindowsOfApp('Slack', '3,2 3x1')
-		adjustWindowsOfApp('Discord', '3,2 3x1')
-		adjustWindowsOfApp('iTerm2', '3,2 3x1')
-	end
-end)
-
--- Flow (dev)
-hs.hotkey.bind(hyper, '0', function()
-	adjustWindowsOfApp('Code', '0,0 3x2')
-	adjustWindowsOfApp('GoLand', '0,0 3x2')
-	adjustWindowsOfApp('iTerm2', '3,0 3x2')
-	adjustWindowsOfApp('Google Chrome', '3,0 3x2')
-
-	focusIfLaunched('iTerm2')
-	focusIfLaunched('GoLand')
-end)
-
-function fullscreenAllWindows()
-	for i, win in ipairs(hs.window:allWindows()) do
-		hs.grid.set(win, '0,0 6x4')
-	end
-end
-
-function adjustWindowsOfApp(appName, gridSettings)
-	local app = hs.application.get(appName)
-	local wins
-	if app then
-		wins = app:allWindows()
-	end
-	if wins then
-		for i, win in ipairs(wins) do
-			hs.grid.set(win, gridSettings)
-		end
-	end
-end
-
-function focusIfLaunched(appName)
-	local app = hs.application.get(appName)
-	if app then
-		app:activate()
-	end
-end
 
 -- Mouse
 function scrollUp()
@@ -207,20 +139,6 @@ end)
 hs.hotkey.bind(hyper, '-', hs.spotify.volumeDown)
 hs.hotkey.bind(hyper, '=', hs.spotify.volumeUp)
 
--- Reload config
-function reloadConfig(files)
-    doReload = false
-    for _,file in pairs(files) do
-        if file:sub(-4) == ".lua" then
-            doReload = true
-        end
-    end
-    if doReload then
-        hs.reload()
-    end
-end
-myWatcher = hs.pathwatcher.new(os.getenv("HOME") .. "/.hammerspoon/", reloadConfig):start()
-
 local audioBeforeSleep = ''
 function caffeinateCallback(eventType)
     if (eventType == hs.caffeinate.watcher.screensDidSleep) then
@@ -247,35 +165,3 @@ caffeinateWatcher:start()
 function printTable(result)
 	for i,v in ipairs(result) do print(i,v) end
 end
-
-local open = io.open
-local notiFile = "/tmp/test"
-
-
-local function read_file(path)
-    local file = open(path, "rb") -- r read mode and b binary mode
-    if not file then return nil end
-    local content = file:read "*a" -- *a or *all reads the whole file
-    file:close()
-    return content
-end
-
-function file_exists(name)
-	local f=io.open(name,"r")
-	if f~=nil then
-		io.close(f)
-		return true
-	else
-		return false
-	end
-end
-
---- Notification from file tracking
-local fileWatcher = hs.pathwatcher.new(notiFile, function(_, eventType)
-	content = read_file(notiFile)
-	if content~=nil then
-		hs.notify.show(content, "", "")
-		os.remove(notiFile)
-	end
-end)
-fileWatcher:start()
