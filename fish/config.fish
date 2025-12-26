@@ -15,6 +15,18 @@ set -gx __kube_ps_enabled 1
 
 set fish_greeting # disable intro message
 
+# machine specific config
+set -l profile_file ~/.dotfishy/profile
+if test -f $profile_file
+    set -l profile (string trim -- (cat $profile_file))
+    switch $profile
+        case work
+            source ~/.config/fish/profiles/work.fish
+        case priv
+            source ~/.config/fish/profiles/priv.fish
+    end
+end
+
 # Created by `pipx` on 2024-12-19 19:36:02
 set PATH $PATH /Users/jakub/.local/bin
 
