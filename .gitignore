@@ -1,2 +1,3 @@
 .DS_Store
 fish/conf.d/external.fish
+fish/fish_variables
