@@ -85,11 +85,6 @@ echo ">> Install Git component"
 echo ">>> Install gitconfig"
 link_file $rootDir/git/gitconfig ~/.gitconfig
 
-echo ">>> Install commit-msg hook"
-link_file $rootDir/git/commit-msg ~/.git-templates/hooks/commit-msg
-echo ">>>> Change git's init.templatedir to include ~/.git-templates"
-git config --global init.templatedir ~/.git-templates
-
 echo ">> Install Vim"
 link_file $rootDir/vim/vimrc ~/.vimrc
 link_file $rootDir/vim/solarized.vim ~/.vim/colors/solarized.vim
@@ -98,4 +93,4 @@ echo ">> Installing Visual Studio Code settings"
 link_file $rootDir/vscode/settings.json "$HOME/Library/Application Support/Code/User/settings.json"
 
 echo ">>> Install FZF completion for fish"
-/opt/Homebrew/opt/fzf/install
+/opt/homebrew/opt/fzf/install

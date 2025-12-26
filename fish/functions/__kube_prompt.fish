@@ -25,7 +25,7 @@ function __kube_ps_update_cache
     #-- cross-platform workaround; POSIX didn't specify stat(1) and so
     #-- its interface is incompatibly different on Mac OS and Linux.
     #-- see https://unix.stackexchange.com/q/561927/3097
-    python3 -c "print(__import__('os').stat(__import__('sys').argv[1]).st_mtime)" $argv
+    python -c "print(__import__('os').stat(__import__('sys').argv[1]).st_mtime)" $argv
   end
 
   set -l kubeconfig "$KUBECONFIG"
