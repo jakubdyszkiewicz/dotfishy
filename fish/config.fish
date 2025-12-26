@@ -9,6 +9,7 @@ set -gx GOPATH $HOME/go
 set -gx PATH $GOPATH/bin $PATH
 set -gx CLOUDSDK_PYTHON python2
 alias c="bat"
+alias python="python3"
 
 set -gx __kube_ps_enabled 1
 
