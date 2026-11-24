@@ -63,5 +63,17 @@ else
     if [ "$(id -u)" -eq 0 ]; then apt-get update; else sudo apt-get update; fi
 fi
 
-echo ">> mise bootstrap -E $envs (packages, dotfiles, settings, login shell, tools)"
-mise bootstrap -E "$envs" --save-env "$@"
+if [ "$os" = macos ]; then
+    echo ">> mise bootstrap -E $envs (packages, dotfiles, settings, login shell, tools)"
+    mise bootstrap -E "$envs" --save-env "$@"
+else
+    echo ">> mise bootstrap -E $envs (packages, dotfiles, tools)"
+    mise bootstrap -E "$envs" --save-env --skip user "$@"
+    # Login shell from config.linux.toml. mise runs plain `chsh`, which asks for the user's
+    # password; cloud users (e.g. `ubuntu`) have none, only passwordless sudo.
+    shell=/usr/bin/fish
+    if [ "$(getent passwd "$(id -un)" | cut -d: -f7)" != "$shell" ]; then
+        echo ">> Login shell -> $shell"
+        if [ "$(id -u)" -eq 0 ]; then chsh -s "$shell"; else sudo chsh -s "$shell" "$(id -un)"; fi
+    fi
+fi
