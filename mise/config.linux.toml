@@ -7,6 +7,7 @@
 "apt:fish" = "latest"
 "apt:htop" = "latest"   # preinstalled on cloud images, not necessarily on Ubuntu Desktop (ant-hill)
 "apt:ncdu" = "latest"
+"apt:python3" = "latest"   # preinstalled on Ubuntu, but not in ubuntu container images (isodev)
 "apt:tmux" = "latest"
 "apt:tree" = "latest"
 "apt:vim" = "latest"
