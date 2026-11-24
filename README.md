@@ -9,13 +9,13 @@ The killer feature is the [Hyper key](http://brettterpstra.com/2012/12/08/a-usef
 Everything is declared in [`mise/`](mise/) and applied with [`mise bootstrap`](https://mise.jdx.dev/bootstrap.html):
 packages, dotfile symlinks, macOS defaults, login shell and dev tools. `~/.config/mise` is a symlink to `~/.dotfishy/mise`.
 
-Each machine loads `mise/config.toml` plus two layers, an OS and a role:
+Each machine loads `mise/config.toml` plus layers: an OS (`macos`/`linux`), `dev` for development machines (runtimes: go, node, java, rust, cmake) and a role:
 
 | Machine | Set up by | `-E` | Gets |
 |---|---|---|---|
-| Private MacBook | `install.sh` | `macos,priv` | everything Mac + private apps |
-| Work MacBook | `install.sh` | `macos,work` | everything Mac + work apps |
-| Mac mini (build server) | `install.sh` | `macos,mini` | everything Mac + power settings task |
+| Private MacBook | `install.sh` | `macos,dev,priv` | everything Mac + private apps |
+| Work MacBook | `install.sh` | `macos,dev,work` | everything Mac + work apps |
+| Mac mini (build server) | `install.sh` | `macos,dev,mini` | everything Mac + power settings task |
 | ant-dev | [ant-hill](https://github.com/jakubdyszkiewicz/ant-hill) | `linux,dev` | fish/tmux/vim (apt), dotfiles, CLI tools + Go |
 | ant-services, ant-hill | [ant-hill](https://github.com/jakubdyszkiewicz/ant-hill) | `linux` | fish/tmux/vim (apt), dotfiles, CLI tools |
 
@@ -58,7 +58,7 @@ Before wiping your Mac, check those:
 ### Packages
 * `[bootstrap.packages]`: brew formulae, casks and App Store apps (`mas:<id>`).
 * `mise/config.macos.toml` - every Mac, `mise/config.<role>.toml` - per machine.
-* `install.sh` runs `mise bootstrap -E macos,<role> --save-env`, so later plain `mise bootstrap` runs remember the layers.
+* `install.sh` runs `mise bootstrap -E macos,dev,<role> --save-env`, so later mise commands (and the shell) use the same layers.
 * Removing an entry does not uninstall it: `mise bootstrap packages prune --manager brew --dry-run` lists leftovers.
 
 ### Fish + fisher

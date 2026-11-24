@@ -1,10 +1,4 @@
-# Every Mac (MacBooks and the Mac mini). Loaded with `-E macos,<role>` by install.sh.
-
-[tools]
-go = "1.27.3"
-node = "24.22.1"
-java = "temurin-27.0.1.1+4"   # same version as brew's openjdk; mise also sets JAVA_HOME
-rust = "1.100.0"
+# Every Mac (MacBooks and the Mac mini). Loaded with `-E macos,dev,<role>` by install.sh.
 
 [bootstrap.user]
 login_shell = "/opt/homebrew/bin/fish"
@@ -36,7 +30,6 @@ post-defaults = "killall Dock || true"
 [bootstrap.packages]
 "brew:blueutil" = "latest"
 "brew:btop" = "latest"   # mise's btop is Linux-only
-"brew:cmake" = "latest"
 "brew:fish" = "latest"
 "brew:gnu-tar" = "latest"
 "brew:htop" = "latest"

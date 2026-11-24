@@ -1,16 +1,18 @@
 # Global mise config: ~/.config/mise is a symlink to this directory.
 #
-# Every machine loads this file plus layers picked with `-E <os>,<role>`:
-#   config.macos.toml  - all Macs (install.sh)         config.linux.toml - Linux boxes (ant-hill Ansible)
-#   config.priv.toml   - private MacBook               config.work.toml  - work MacBook
-#   config.mini.toml   - Mac mini build server         config.dev.toml   - ant-dev
+# Every machine loads this file plus layers picked with `-E`:
+#   config.macos.toml - all Macs                 config.linux.toml - Linux boxes (ant-hill Ansible)
+#   config.dev.toml   - dev machines: runtimes   config.priv.toml / config.work.toml / config.mini.toml
 #
-# Machine        profile file   envs
-#   MacBook      priv / work    macos,priv / macos,work
-#   Mac mini     mini           macos,mini
-#   ant-dev      (Ansible)      linux,dev
-#   ant-services (Ansible)      linux
-#   ant-hill     (Ansible)      linux
+# Machine        set up by     envs
+#   MacBook      install.sh    macos,dev,priv / macos,dev,work
+#   Mac mini     install.sh    macos,dev,mini
+#   ant-dev      Ansible       linux,dev
+#   ant-services Ansible       linux
+#   ant-hill     Ansible       linux
+#
+# --save-env remembers the envs in miserc.local.toml, so every mise command (and the shell)
+# uses the same layers without -E.
 #
 #   mise bootstrap --dry-run   # preview (envs are remembered by --save-env in miserc.local.toml)
 #   mise bootstrap             # apply

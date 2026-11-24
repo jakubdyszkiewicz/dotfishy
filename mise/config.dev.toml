@@ -1,4 +1,9 @@
-# ant-dev (Kong / Kuma development box). Loaded with `-E linux,dev`.
+# Development machines: every Mac (MacBooks, Mac mini) and ant-dev.
+# Loaded with `-E macos,dev,<role>` (install.sh) or `-E linux,dev` (ant-hill).
 
 [tools]
 go = "1.27.3"
+node = "24.22.1"
+java = "temurin-27.0.1.1+4"   # mise also sets JAVA_HOME
+rust = "1.100.0"
+cmake = "4.5.1"
