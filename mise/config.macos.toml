@@ -34,16 +34,12 @@ post-defaults = "killall Dock || true"
 # brew / casks / App Store can't pin versions; "latest" means "installed".
 # Upgrade with `mise bootstrap packages upgrade`.
 [bootstrap.packages]
-"brew:bat" = "latest"
 "brew:blueutil" = "latest"
-"brew:btop" = "latest"
+"brew:btop" = "latest"   # mise's btop is Linux-only
 "brew:cmake" = "latest"
 "brew:fish" = "latest"
-"brew:fzf" = "latest"
-"brew:gh" = "latest"
 "brew:gnu-tar" = "latest"
 "brew:htop" = "latest"
-"brew:jq" = "latest"
 "brew:mas" = "latest"
 "brew:mise" = "latest"
 "brew:ncdu" = "latest"

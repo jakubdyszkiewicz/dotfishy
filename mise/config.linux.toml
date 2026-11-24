@@ -1,4 +1,13 @@
 # Linux boxes provisioned by ant-hill (ant-dev, ant-services, ant-hill itself).
-# Loaded with `-E linux[,<role>]` by the ant-hill `dotfiles` role, which runs
-# `mise bootstrap --only dotfiles,tools`. System packages (apt), the login shell,
-# docker etc. stay in Ansible; this layer only adds user-level things.
+# Loaded with `-E linux[,<role>]` by the ant-hill `dotfiles` role: it installs git + mise,
+# runs `mise bootstrap --only packages` as root, then `--only dotfiles,tools` as the user.
+# Docker, users, the login shell (chsh) etc. stay in Ansible.
+
+[tools]
+btop = "1.4.8"   # Linux-only in mise; Macs get it from brew
+
+[bootstrap.packages]
+"apt:fish" = "latest"
+"apt:tmux" = "latest"
+"apt:vim" = "latest"
+"apt:unzip" = "latest"

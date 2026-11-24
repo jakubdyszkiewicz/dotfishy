@@ -16,12 +16,13 @@ Each machine loads `mise/config.toml` plus two layers, an OS and a role:
 | Private MacBook | `install.sh` | `macos,priv` | everything Mac + private apps |
 | Work MacBook | `install.sh` | `macos,work` | everything Mac + work apps |
 | Mac mini (build server) | `install.sh` | `macos,mini` | everything Mac + power settings task |
-| ant-dev | [ant-hill](https://github.com/jakubdyszkiewicz/ant-hill) | `linux,dev` | shell/vim/tmux + Go |
-| ant-services, ant-hill | [ant-hill](https://github.com/jakubdyszkiewicz/ant-hill) | `linux` | shell/vim/tmux |
+| ant-dev | [ant-hill](https://github.com/jakubdyszkiewicz/ant-hill) | `linux,dev` | fish/tmux/vim (apt), dotfiles, CLI tools + Go |
+| ant-services, ant-hill | [ant-hill](https://github.com/jakubdyszkiewicz/ant-hill) | `linux` | fish/tmux/vim (apt), dotfiles, CLI tools |
 
 On Macs the role comes from the gitignored `profile` file (also read by fish and Hammerspoon).
-On Linux, Ansible installs mise, clones this repo and runs `mise bootstrap --only dotfiles,tools`;
-apt packages, users, docker etc. stay in Ansible.
+CLI tools (fzf, gh, bat, jq) are mise `[tools]` in `config.toml`: same pinned versions on every machine.
+On Linux, Ansible installs git + mise, clones this repo, runs `mise bootstrap --only packages` as root
+(the `apt:` entries in `config.linux.toml`) and `--only dotfiles,tools` as the user; docker, users etc. stay in Ansible.
 
 ## A fresh MacOS Setup
 
