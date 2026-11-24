@@ -10,3 +10,7 @@ cmake = "4.5.1"
 opencode = "2.3.2"      # was brew anomalyco/tap/opencode-v2
 claude-code = "2.1.323" # was brew cask claude-code
 codex = "0.171.0"       # was brew cask codex
+
+# Linux dev machines only (Macs get compilers from the Xcode tools).
+[bootstrap.packages]
+"apt:build-essential" = { os = "linux" }
