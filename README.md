@@ -20,7 +20,7 @@ Each machine loads `mise/config.toml` plus two layers, an OS and a role:
 | ant-services, ant-hill | [ant-hill](https://github.com/jakubdyszkiewicz/ant-hill) | `linux` | fish/tmux/vim (apt), dotfiles, CLI tools |
 
 On Macs the role comes from the gitignored `profile` file (also read by fish and Hammerspoon).
-CLI tools (fzf, gh, bat, jq) are mise `[tools]` in `config.toml`: same pinned versions on every machine.
+CLI tools (fzf, gh, bat, jq, sift) are mise `[tools]` in `config.toml`: same pinned versions on every machine.
 On Linux, Ansible installs git + mise, clones this repo, runs `mise bootstrap --only packages` as root
 (the `apt:` entries in `config.linux.toml`) and `--only dotfiles,tools` as the user; docker, users etc. stay in Ansible.
 

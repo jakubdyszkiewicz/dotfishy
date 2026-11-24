@@ -8,6 +8,7 @@ btop = "1.4.8"   # Linux-only in mise; Macs get it from brew
 
 [bootstrap.packages]
 "apt:fish" = "latest"
+"apt:htop" = "latest"   # preinstalled on cloud images, not necessarily on Ubuntu Desktop (ant-hill)
 "apt:tmux" = "latest"
 "apt:vim" = "latest"
 "apt:unzip" = "latest"

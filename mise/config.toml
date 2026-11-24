@@ -25,6 +25,7 @@ fzf = "0.75.0"   # fish key bindings come from `fzf --fish`
 gh = "2.105.0"
 bat = "0.26.1"
 jq = "1.8.2"
+"github:svent/sift" = "0.9.2"   # grep alternative; not in the registry, and apt's `sift` is a different program
 
 # Shell, prompt and editor: the same on every machine
 [dotfiles]
