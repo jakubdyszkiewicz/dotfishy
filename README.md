@@ -9,17 +9,18 @@ The killer feature is the [Hyper key](http://brettterpstra.com/2012/12/08/a-usef
 Everything is declared in [`mise/`](mise/) and applied with [`mise bootstrap`](https://mise.jdx.dev/bootstrap.html):
 packages, dotfile symlinks, macOS defaults, login shell and dev tools. `~/.config/mise` is a symlink to `~/.dotfishy/mise`.
 
-Each machine loads `mise/config.toml` plus layers: an OS (`macos`/`linux`), `dev` for development machines (runtimes: go, node, java, rust, cmake) and a role:
+Each machine loads `mise/config.toml` plus layers: an OS (`macos`/`linux`), `dev` for development machines (go, node, java, rust, cmake, coding agents) and a role:
 
 | Machine | Set up by | `-E` | Gets |
 |---|---|---|---|
 | Private MacBook | `install.sh` | `macos,dev,priv` | everything Mac + private apps |
 | Work MacBook | `install.sh` | `macos,dev,work` | everything Mac + work apps |
 | Mac mini (build server) | `install.sh` | `macos,dev,mini` | everything Mac + power settings task |
-| ant-dev | [ant-hill](https://github.com/jakubdyszkiewicz/ant-hill) | `linux,dev` | fish/tmux/vim (apt), dotfiles, CLI tools + Go |
-| ant-services, ant-hill | [ant-hill](https://github.com/jakubdyszkiewicz/ant-hill) | `linux` | fish/tmux/vim (apt), dotfiles, CLI tools |
+| ant-dev | [ant-hill](https://github.com/jakubdyszkiewicz/ant-hill) | `linux,dev` | apt packages, dotfiles, CLI tools + dev tools |
+| ant-services, ant-hill | [ant-hill](https://github.com/jakubdyszkiewicz/ant-hill) | `linux` | apt packages, dotfiles, CLI tools |
+| Any other Ubuntu box | `install.sh` | `linux` or `linux,dev` | same as above, plus fish as login shell |
 
-On Macs the role comes from the gitignored `profile` file (also read by fish and Hammerspoon).
+With `install.sh` the role comes from the gitignored `profile` file (also read by fish and Hammerspoon).
 CLI tools (fzf, gh, bat, jq, sift) are mise `[tools]` in `config.toml`: same pinned versions on every machine.
 On Linux, Ansible installs git + mise, clones this repo, runs `mise bootstrap --only packages` as root
 (the `apt:` entries in `config.linux.toml`) and `--only dotfiles,tools` as the user; docker, users etc. stay in Ansible.
@@ -45,6 +46,14 @@ Before wiping your Mac, check those:
 * Chrome - cVim options https://gist.github.com/jakubdyszkiewicz/f6bbb523c7e383525afa276f9f060680
 * Setup IntelliJ settings sync
 * Switch Spotlight to Raycast and import the settings
+
+## A fresh Ubuntu box (not managed by ant-hill)
+Needs `git` and `curl` (both preinstalled on Ubuntu).
+```sh
+git clone https://github.com/jakubdyszkiewicz/dotfishy ~/.dotfishy && ~/.dotfishy/install.sh
+```
+It asks for the role (`dev`, or empty for a server), installs mise to `~/.local/bin`,
+installs the apt packages (with sudo), links the dotfiles, installs the tools and switches the login shell to fish.
 
 ## Updating
 * `mise bootstrap --dry-run` / `mise bootstrap plan` - preview what differs from the config

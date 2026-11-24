@@ -8,3 +8,6 @@
 "apt:tree" = "latest"
 "apt:vim" = "latest"
 "apt:unzip" = "latest"
+
+[bootstrap.user]
+login_shell = "/usr/bin/fish" # ant-hill boxes: Ansible switches the shell (its role skips this step)
