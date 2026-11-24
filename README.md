@@ -6,7 +6,11 @@ The killer feature is the [Hyper key](http://brettterpstra.com/2012/12/08/a-usef
 ![iTerm](https://i.imgur.com/StrxYCA.png)
 
 ## How it works
-Study `install.sh`. The script links proper configurations from `~/.dotfishy` to apps config locations.
+Everything is declared in [`mise/config.toml`](mise/config.toml) and applied with [`mise bootstrap`](https://mise.jdx.dev/bootstrap.html):
+Homebrew formulae/casks, App Store apps, dotfile symlinks, macOS defaults, the login shell, and dev tools (go, node).
+`~/.config/mise` is a symlink to `~/.dotfishy/mise`, so this is mise's global config.
+
+`install.sh` only installs Homebrew and mise, creates that symlink and runs `mise bootstrap`.
 
 ## A fresh MacOS Setup
 
@@ -31,14 +35,18 @@ Before wiping your Mac, check those:
 * Switch Spotlight to Raycast and import the settings
 
 ## Updating
-Run `./install.sh` again.
+* `mise bootstrap --dry-run` / `mise bootstrap plan` - preview what differs from the config
+* `mise bootstrap` - apply (or run `./install.sh` again)
+* `mise bootstrap packages use brew-cask:foo` - install an app and add it to the config
+* `mise bootstrap packages upgrade` - upgrade packages
+* `mise dot status` - check dotfile links
 
 ## Components
 
-### Homebrew
-* Installs tools, apps using `cask` and apps from App Store using `mas`.
+### Packages
+* `[bootstrap.packages]` in `mise/config.toml`: brew formulae, casks and App Store apps (`mas:<id>`).
 
-### Fish + Oh-My-Fish
+### Fish + fisher
 * Solarized Light Theme
 * Fancy Prompt
 * [z](https://github.com/rupa/z/)
@@ -61,7 +69,7 @@ Run `./install.sh` again.
 * Fn + h/j/k/l - navigate mouse, Fn + u/i to scroll
 
 ### MacOs
-* Setting various preferences using cli commands.
+* `[bootstrap.settings.macos]` in `mise/config.toml`.
 
 ### Vim
 * Solarized Light Theme

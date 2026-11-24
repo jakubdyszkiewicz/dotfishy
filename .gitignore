@@ -2,3 +2,6 @@
 fish/conf.d/external.fish
 fish/fish_variables
 profile
+karabiner/automatic_backups/
+mise/config.local.toml
+mise/miserc.local.toml
