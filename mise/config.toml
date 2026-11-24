@@ -14,6 +14,8 @@ activate_aggressive = true
 [tools]
 go = "1.27.3"
 node = "24.22.1"
+java = "temurin-27.0.1.1+4"   # same version as brew's openjdk; mise also sets JAVA_HOME
+rust = "1.100.0"
 
 [bootstrap.user]
 login_shell = "/opt/homebrew/bin/fish"
