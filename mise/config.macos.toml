@@ -64,7 +64,7 @@ post-defaults = "killall Dock || true"
 "brew-cask:iterm2" = "latest"
 "brew-cask:karabiner-elements" = "latest"
 "brew-cask:obsidian" = "latest"
-"brew-cask:rancher" = { env = ["priv", "work"] }   # GUI docker; the Mac mini uses colima
+"brew-cask:rancher" = "latest"
 "brew-cask:raycast" = "latest"
 "brew-cask:scroll-reverser" = "latest"
 "brew-cask:spotify" = "latest"

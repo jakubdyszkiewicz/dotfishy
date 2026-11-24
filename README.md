@@ -15,7 +15,7 @@ Each machine loads `mise/config.toml` plus two layers, an OS and a role:
 |---|---|---|---|
 | Private MacBook | `install.sh` | `macos,priv` | everything Mac + private apps |
 | Work MacBook | `install.sh` | `macos,work` | everything Mac + work apps |
-| Mac mini (build server) | `install.sh` | `macos,mini` | everything Mac + colima/docker |
+| Mac mini (build server) | `install.sh` | `macos,mini` | everything Mac + power settings task |
 | ant-dev | [ant-hill](https://github.com/jakubdyszkiewicz/ant-hill) | `linux,dev` | shell/vim/tmux + Go |
 | ant-services, ant-hill | [ant-hill](https://github.com/jakubdyszkiewicz/ant-hill) | `linux` | shell/vim/tmux |
 
