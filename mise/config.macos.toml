@@ -1,0 +1,74 @@
+# Every Mac (MacBooks and the Mac mini). Loaded with `-E macos,<role>` by install.sh.
+
+[tools]
+go = "1.27.3"
+node = "24.22.1"
+java = "temurin-27.0.1.1+4"   # same version as brew's openjdk; mise also sets JAVA_HOME
+rust = "1.100.0"
+
+[bootstrap.user]
+login_shell = "/opt/homebrew/bin/fish"
+
+[dotfiles]
+"~/.gitconfig" = "~/.dotfishy/git/gitconfig"
+"~/.hammerspoon" = "~/.dotfishy/hammerspoon"
+"~/.config/karabiner" = "~/.dotfishy/karabiner"
+"~/Library/Application Support/Code/User/settings.json" = "~/.dotfishy/vscode/settings.json"
+
+# --- macOS defaults (was macos/macos.sh) ---
+# Raw table, not [bootstrap.settings.macos.dock]: that one only takes integers,
+# but the Dock stores tilesize as a real.
+[bootstrap.settings.macos.defaults."com.apple.dock"]
+tilesize = 42.0
+
+[bootstrap.settings.macos.defaults.NSGlobalDomain]
+CGFontRenderingFontSmoothingDisabled = false
+
+[bootstrap.settings.macos.defaults."com.apple.finder"]
+WarnOnEmptyTrash = false
+
+[bootstrap.hooks]
+post-defaults = "killall Dock || true"
+
+# --- Packages for every Mac (was brew/Brewfile) ---
+# brew / casks / App Store can't pin versions; "latest" means "installed".
+# Upgrade with `mise bootstrap packages upgrade`.
+[bootstrap.packages]
+"brew:bat" = "latest"
+"brew:blueutil" = "latest"
+"brew:btop" = "latest"
+"brew:cmake" = "latest"
+"brew:fish" = "latest"
+"brew:fzf" = "latest"
+"brew:gh" = "latest"
+"brew:gnu-tar" = "latest"
+"brew:htop" = "latest"
+"brew:jq" = "latest"
+"brew:mas" = "latest"
+"brew:mise" = "latest"
+"brew:ncdu" = "latest"
+"brew:anomalyco/tap/opencode-v2" = "latest"
+"brew:p7zip" = "latest"
+"brew:sift" = "latest"
+"brew:step" = "latest"
+"brew:switchaudio-osx" = "latest"
+"brew:telnet" = "latest"
+"brew:tmux" = "latest"
+"brew:tree" = "latest"
+"brew:wget" = "latest"
+"brew:xz" = "latest"
+"brew-cask:chatgpt" = "latest"
+"brew-cask:claude-code" = "latest"
+"brew-cask:hammerspoon" = "latest"
+"brew-cask:hiddenbar" = "latest"
+"brew-cask:iterm2" = "latest"
+"brew-cask:karabiner-elements" = "latest"
+"brew-cask:obsidian" = "latest"
+"brew-cask:rancher" = { env = ["priv", "work"] }   # GUI docker; the Mac mini uses colima
+"brew-cask:raycast" = "latest"
+"brew-cask:scroll-reverser" = "latest"
+"brew-cask:spotify" = "latest"
+"brew-cask:visual-studio-code" = "latest"
+"brew-cask:zed" = "latest"
+"mas:1319778037" = "latest" # iStat Menus
+"mas:497799835" = "latest" # Xcode

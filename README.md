@@ -6,11 +6,22 @@ The killer feature is the [Hyper key](http://brettterpstra.com/2012/12/08/a-usef
 ![iTerm](https://i.imgur.com/StrxYCA.png)
 
 ## How it works
-Everything is declared in [`mise/config.toml`](mise/config.toml) and applied with [`mise bootstrap`](https://mise.jdx.dev/bootstrap.html):
-Homebrew formulae/casks, App Store apps, dotfile symlinks, macOS defaults, the login shell, and dev tools (go, node).
-`~/.config/mise` is a symlink to `~/.dotfishy/mise`, so this is mise's global config.
+Everything is declared in [`mise/`](mise/) and applied with [`mise bootstrap`](https://mise.jdx.dev/bootstrap.html):
+packages, dotfile symlinks, macOS defaults, login shell and dev tools. `~/.config/mise` is a symlink to `~/.dotfishy/mise`.
 
-`install.sh` only installs Homebrew and mise, creates that symlink and runs `mise bootstrap`.
+Each machine loads `mise/config.toml` plus two layers, an OS and a role:
+
+| Machine | Set up by | `-E` | Gets |
+|---|---|---|---|
+| Private MacBook | `install.sh` | `macos,priv` | everything Mac + private apps |
+| Work MacBook | `install.sh` | `macos,work` | everything Mac + work apps |
+| Mac mini (build server) | `install.sh` | `macos,mini` | everything Mac + colima/docker |
+| ant-dev | [ant-hill](https://github.com/jakubdyszkiewicz/ant-hill) | `linux,dev` | shell/vim/tmux + Go |
+| ant-services, ant-hill | [ant-hill](https://github.com/jakubdyszkiewicz/ant-hill) | `linux` | shell/vim/tmux |
+
+On Macs the role comes from the gitignored `profile` file (also read by fish and Hammerspoon).
+On Linux, Ansible installs mise, clones this repo and runs `mise bootstrap --only dotfiles,tools`;
+apt packages, users, docker etc. stay in Ansible.
 
 ## A fresh MacOS Setup
 
@@ -45,9 +56,8 @@ Before wiping your Mac, check those:
 
 ### Packages
 * `[bootstrap.packages]`: brew formulae, casks and App Store apps (`mas:<id>`).
-* `mise/config.toml` - every machine, `mise/config.priv.toml` / `mise/config.work.toml` - per machine.
-* The machine profile is the gitignored `profile` file (`work` / `priv`), also used by fish and Hammerspoon.
-  `install.sh` passes it to `mise bootstrap -E <profile> --save-env`, so later plain `mise bootstrap` runs remember it.
+* `mise/config.macos.toml` - every Mac, `mise/config.<role>.toml` - per machine.
+* `install.sh` runs `mise bootstrap -E macos,<role> --save-env`, so later plain `mise bootstrap` runs remember the layers.
 * Removing an entry does not uninstall it: `mise bootstrap packages prune --manager brew --dry-run` lists leftovers.
 
 ### Fish + fisher

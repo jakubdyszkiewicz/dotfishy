@@ -1,0 +1,4 @@
+# ant-dev (Kong / Kuma development box). Loaded with `-E linux,dev`.
+
+[tools]
+go = "1.27.3"

@@ -26,12 +26,14 @@ fi
 
 for f in "$rootDir"/mise/config*.toml; do mise trust "$f"; done
 
-# Machine profile (work/priv) selects mise/config.<profile>.toml
+# Machine role (priv/work/mini), also read by fish and Hammerspoon. Selects mise/config.<role>.toml
+# on top of mise/config.macos.toml. Linux boxes are set up by ant-hill (Ansible), not this script.
 profile="$(tr -d '[:space:]' < "$rootDir/profile" 2>/dev/null || true)"
 if [ -z "$profile" ]; then
-    read -r -p "Profile for this machine (work/priv): " profile
+    read -r -p "Role of this Mac (priv/work/mini): " profile
     echo "$profile" > "$rootDir/profile"
 fi
+envs="macos${profile:+,$profile}"
 
-echo ">> mise bootstrap -E $profile (packages, dotfiles, macOS defaults, login shell, tools)"
-mise bootstrap -E "$profile" --save-env "$@"
+echo ">> mise bootstrap -E $envs (packages, dotfiles, macOS defaults, login shell, tools)"
+mise bootstrap -E "$envs" --save-env "$@"

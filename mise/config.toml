@@ -1,88 +1,27 @@
-# Global mise config. ~/.config/mise is a symlink to this directory (see install.sh).
+# Global mise config: ~/.config/mise is a symlink to this directory.
 #
-#   mise bootstrap --dry-run   # preview what would change on this machine
-#   mise bootstrap             # install packages, link dotfiles, apply macOS defaults, tools
+# Every machine loads this file plus layers picked with `-E <os>,<role>`:
+#   config.macos.toml  - all Macs (install.sh)         config.linux.toml - Linux boxes (ant-hill Ansible)
+#   config.priv.toml   - private MacBook               config.work.toml  - work MacBook
+#   config.mini.toml   - Mac mini build server         config.dev.toml   - ant-dev
+#
+# Machine        profile file   envs
+#   MacBook      priv / work    macos,priv / macos,work
+#   Mac mini     mini           macos,mini
+#   ant-dev      (Ansible)      linux,dev
+#   ant-services (Ansible)      linux
+#   ant-hill     (Ansible)      linux
+#
+#   mise bootstrap --dry-run   # preview (envs are remembered by --save-env in miserc.local.toml)
+#   mise bootstrap             # apply
 #   mise dot status            # check dotfile links
-#
-# Machine-specific packages live in config.work.toml / config.priv.toml.
-# The active one comes from ~/.dotfishy/profile (install.sh passes it as `-E <profile> --save-env`,
-# which remembers it in mise/miserc.local.toml for later `mise bootstrap` runs).
 
 [settings]
 activate_aggressive = true
 
-[tools]
-go = "1.27.3"
-node = "24.22.1"
-java = "temurin-27.0.1.1+4"   # same version as brew's openjdk; mise also sets JAVA_HOME
-rust = "1.100.0"
-
-[bootstrap.user]
-login_shell = "/opt/homebrew/bin/fish"
-
+# Shell, prompt and editor: the same on every machine
 [dotfiles]
 "~/.config/fish" = "~/.dotfishy/fish"
-"~/.hammerspoon" = "~/.dotfishy/hammerspoon"
-"~/.config/karabiner" = "~/.dotfishy/karabiner"
-"~/.gitconfig" = "~/.dotfishy/git/gitconfig"
 "~/.vimrc" = "~/.dotfishy/vim/vimrc"
 "~/.vim/colors/solarized.vim" = "~/.dotfishy/vim/solarized.vim"
-"~/Library/Application Support/Code/User/settings.json" = "~/.dotfishy/vscode/settings.json"
-
-# --- macOS defaults (was macos/macos.sh) ---
-# Raw table, not [bootstrap.settings.macos.dock]: that one only takes integers,
-# but the Dock stores tilesize as a real.
-[bootstrap.settings.macos.defaults."com.apple.dock"]
-tilesize = 42.0
-
-[bootstrap.settings.macos.defaults.NSGlobalDomain]
-CGFontRenderingFontSmoothingDisabled = false
-
-[bootstrap.settings.macos.defaults."com.apple.finder"]
-WarnOnEmptyTrash = false
-
-[bootstrap.hooks]
-post-defaults = "killall Dock || true"
-
-# --- Packages shared by all machines (was brew/Brewfile) ---
-# brew / casks / App Store can't pin versions; "latest" means "installed".
-# Upgrade with `mise bootstrap packages upgrade`.
-[bootstrap.packages]
-"brew:bat" = "latest"
-"brew:blueutil" = "latest"
-"brew:btop" = "latest"
-"brew:cmake" = "latest"
-"brew:fish" = "latest"
-"brew:fzf" = "latest"
-"brew:gh" = "latest"
-"brew:gnu-tar" = "latest"
-"brew:htop" = "latest"
-"brew:jq" = "latest"
-"brew:mas" = "latest"
-"brew:mise" = "latest"
-"brew:ncdu" = "latest"
-"brew:anomalyco/tap/opencode-v2" = "latest"
-"brew:p7zip" = "latest"
-"brew:sift" = "latest"
-"brew:step" = "latest"
-"brew:switchaudio-osx" = "latest"
-"brew:telnet" = "latest"
-"brew:tmux" = "latest"
-"brew:tree" = "latest"
-"brew:wget" = "latest"
-"brew:xz" = "latest"
-"brew-cask:chatgpt" = "latest"
-"brew-cask:claude-code" = "latest"
-"brew-cask:hammerspoon" = "latest"
-"brew-cask:hiddenbar" = "latest"
-"brew-cask:iterm2" = "latest"
-"brew-cask:karabiner-elements" = "latest"
-"brew-cask:obsidian" = "latest"
-"brew-cask:rancher" = "latest"
-"brew-cask:raycast" = "latest"
-"brew-cask:scroll-reverser" = "latest"
-"brew-cask:spotify" = "latest"
-"brew-cask:visual-studio-code" = "latest"
-"brew-cask:zed" = "latest"
-"mas:1319778037" = "latest" # iStat Menus
-"mas:497799835" = "latest" # Xcode
+"~/.tmux.conf" = "~/.dotfishy/tmux/tmux.conf"

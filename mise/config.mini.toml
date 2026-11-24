@@ -1,0 +1,17 @@
+# Mac mini build server: iOS/macOS apps (Xcode comes from config.macos.toml),
+# Rust and Go (tools from config.macos.toml), containers via colima.
+# Mostly used over SSH. Loaded with `-E macos,mini`.
+
+[bootstrap.packages]
+"brew:colima" = "latest"
+"brew:docker" = "latest"
+"brew:docker-buildx" = "latest"
+
+[bootstrap.hooks]
+# colima runs as a LaunchAgent, so it starts once a user session exists (enable automatic login for SSH-only use)
+post-packages = "brew services start colima || true"
+
+# One-off system settings that need sudo, run by hand: `mise run mini:power`
+[tasks."mini:power"]
+description = "Never sleep, restart after a power failure, wake on LAN"
+run = "sudo pmset -a sleep 0 disksleep 0 autorestart 1 womp 1"
