@@ -1,0 +1,34 @@
+# Private MacBook only. Loaded with `mise bootstrap -E priv` (see config.toml).
+
+[bootstrap.hooks]
+# mise does not manage `brew services`
+post-packages = "brew services start syncthing || true"
+
+[bootstrap.packages]
+"brew:ansible" = "latest"
+"brew:b2-tools" = "latest"
+"brew:syncthing" = "latest"
+"brew-cask:1password" = "latest"
+"brew-cask:codexbar" = "latest"
+"brew-cask:discord" = "latest"
+"brew-cask:firefox" = "latest"
+"brew-cask:google-chrome" = "latest"
+"brew-cask:helium-browser" = "latest"
+"brew-cask:hermes-desktop" = "latest"
+"brew-cask:paseo" = "latest"
+"brew-cask:slack" = "latest"
+"brew-cask:steam" = "latest"
+"brew-cask:the-unarchiver" = "latest"
+"brew-cask:transmission" = "latest"
+"brew-cask:utm" = "latest"
+"brew-cask:vlc" = "latest"
+"brew-cask:zoom" = "latest"
+"mas:1451544217" = "latest" # Adobe Lightroom
+"mas:824183456" = "latest" # Affinity Photo
+"mas:1091189122" = "latest" # Bear
+"mas:1193539993" = "latest" # Brother iPrint&Scan
+"mas:682658836" = "latest" # GarageBand
+"mas:6472865291" = "latest" # keymapp
+"mas:409203825" = "latest" # Numbers
+"mas:409201541" = "latest" # Pages
+"mas:904280696" = "latest" # Things

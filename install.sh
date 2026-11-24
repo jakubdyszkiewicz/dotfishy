@@ -24,7 +24,14 @@ if [ "$(readlink ~/.config/mise || true)" != "$rootDir/mise" ]; then
     ln -s "$rootDir/mise" ~/.config/mise
 fi
 
-mise trust "$rootDir/mise/config.toml"
+for f in "$rootDir"/mise/config*.toml; do mise trust "$f"; done
 
-echo ">> mise bootstrap (packages, dotfiles, macOS defaults, login shell, tools)"
-mise bootstrap "$@"
+# Machine profile (work/priv) selects mise/config.<profile>.toml
+profile="$(tr -d '[:space:]' < "$rootDir/profile" 2>/dev/null || true)"
+if [ -z "$profile" ]; then
+    read -r -p "Profile for this machine (work/priv): " profile
+    echo "$profile" > "$rootDir/profile"
+fi
+
+echo ">> mise bootstrap -E $profile (packages, dotfiles, macOS defaults, login shell, tools)"
+mise bootstrap -E "$profile" --save-env "$@"

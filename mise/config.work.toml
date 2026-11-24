@@ -1,0 +1,3 @@
+# Work MacBook only. Loaded with `mise bootstrap -E work` (see config.toml).
+
+[bootstrap.packages]

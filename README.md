@@ -44,7 +44,11 @@ Before wiping your Mac, check those:
 ## Components
 
 ### Packages
-* `[bootstrap.packages]` in `mise/config.toml`: brew formulae, casks and App Store apps (`mas:<id>`).
+* `[bootstrap.packages]`: brew formulae, casks and App Store apps (`mas:<id>`).
+* `mise/config.toml` - every machine, `mise/config.priv.toml` / `mise/config.work.toml` - per machine.
+* The machine profile is the gitignored `profile` file (`work` / `priv`), also used by fish and Hammerspoon.
+  `install.sh` passes it to `mise bootstrap -E <profile> --save-env`, so later plain `mise bootstrap` runs remember it.
+* Removing an entry does not uninstall it: `mise bootstrap packages prune --manager brew --dry-run` lists leftovers.
 
 ### Fish + fisher
 * Solarized Light Theme
