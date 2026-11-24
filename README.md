@@ -6,7 +6,24 @@ The killer feature is the [Hyper key](http://brettterpstra.com/2012/12/08/a-usef
 ![iTerm](https://i.imgur.com/StrxYCA.png)
 
 ## How it works
-Study `install.sh`. The script links proper configurations from `~/.dotfishy` to apps config locations.
+Everything is declared in [`mise/`](mise/) and applied with [`mise bootstrap`](https://mise.jdx.dev/bootstrap.html):
+packages, dotfile symlinks, macOS defaults, login shell and dev tools. `~/.config/mise` is a symlink to `~/.dotfishy/mise`.
+
+Each machine loads `mise/config.toml` plus layers: an OS (`macos`/`linux`), `dev` for development machines (go, node, java, rust, cmake, coding agents) and a role:
+
+| Machine | Set up by | `-E` | Gets |
+|---|---|---|---|
+| Private MacBook | `install.sh` | `macos,dev,priv` | everything Mac + private apps |
+| Work MacBook | `install.sh` | `macos,dev,work` | everything Mac + work apps |
+| Mac mini (build server) | `install.sh` | `macos,dev,mini` | everything Mac + power settings task |
+| ant-dev | [ant-hill](https://github.com/jakubdyszkiewicz/ant-hill) | `linux,dev` | apt packages, dotfiles, CLI tools + dev tools |
+| ant-services, ant-hill | [ant-hill](https://github.com/jakubdyszkiewicz/ant-hill) | `linux` | apt packages, dotfiles, CLI tools |
+| Any other Ubuntu box | `install.sh` | `linux` or `linux,dev` | same as above, plus fish as login shell |
+
+With `install.sh` the role comes from the gitignored `profile` file (also read by fish and Hammerspoon).
+CLI tools (fzf, gh, bat, jq, sift) are mise `[tools]` in `config.toml`: same pinned versions on every machine.
+On Linux, Ansible installs git + mise, clones this repo, runs `mise bootstrap --only packages` as root
+(the `apt:` entries in `config.linux.toml`) and `--only dotfiles,tools` as the user; docker, users etc. stay in Ansible.
 
 ## A fresh MacOS Setup
 
@@ -30,15 +47,30 @@ Before wiping your Mac, check those:
 * Setup IntelliJ settings sync
 * Switch Spotlight to Raycast and import the settings
 
+## A fresh Ubuntu box (not managed by ant-hill)
+Needs `git` and `curl` (both preinstalled on Ubuntu).
+```sh
+git clone https://github.com/jakubdyszkiewicz/dotfishy ~/.dotfishy && ~/.dotfishy/install.sh
+```
+It asks for the role (`dev`, or empty for a server), installs mise to `~/.local/bin`,
+installs the apt packages (with sudo), links the dotfiles, installs the tools and switches the login shell to fish.
+
 ## Updating
-Run `./install.sh` again.
+* `mise bootstrap --dry-run` / `mise bootstrap plan` - preview what differs from the config
+* `mise bootstrap` - apply (or run `./install.sh` again)
+* `mise bootstrap packages use brew-cask:foo` - install an app and add it to the config
+* `mise bootstrap packages upgrade` - upgrade packages
+* `mise dot status` - check dotfile links
 
 ## Components
 
-### Homebrew
-* Installs tools, apps using `cask` and apps from App Store using `mas`.
+### Packages
+* `[bootstrap.packages]`: brew formulae, casks and App Store apps (`mas:<id>`).
+* `mise/config.macos.toml` - every Mac, `mise/config.<role>.toml` - per machine.
+* `install.sh` runs `mise bootstrap -E macos,dev,<role> --save-env`, so later mise commands (and the shell) use the same layers.
+* Removing an entry does not uninstall it: `mise bootstrap packages prune --manager brew --dry-run` lists leftovers.
 
-### Fish + Oh-My-Fish
+### Fish + fisher
 * Solarized Light Theme
 * Fancy Prompt
 * [z](https://github.com/rupa/z/)
@@ -61,7 +93,7 @@ Run `./install.sh` again.
 * Fn + h/j/k/l - navigate mouse, Fn + u/i to scroll
 
 ### MacOs
-* Setting various preferences using cli commands.
+* `[bootstrap.settings.macos]` in `mise/config.toml`.
 
 ### Vim
 * Solarized Light Theme

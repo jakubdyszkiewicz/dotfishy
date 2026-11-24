@@ -1,0 +1,5 @@
+# Profile for mac mini build server
+
+[tasks."mini:power"]
+description = "Never sleep, restart after a power failure, wake on LAN"
+run = "sudo pmset -a sleep 0 disksleep 0 autorestart 1 womp 1"

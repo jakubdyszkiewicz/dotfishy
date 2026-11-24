@@ -1,0 +1,36 @@
+# Global mise config: ~/.config/mise is a symlink to this directory.
+#
+# Every machine loads this file plus layers picked with `-E`:
+#   config.macos.toml - all Macs                 config.linux.toml - Linux boxes
+#   config.dev.toml   - dev machines: runtimes   config.priv.toml / config.work.toml / config.mini.toml
+#
+# Machine        set up by     envs
+#   MacBook      install.sh    macos,dev,priv / macos,dev,work
+#   Mac mini     install.sh    macos,dev,mini
+#   ant-dev      Ansible       linux,dev
+#   ant-services Ansible       linux
+#   ant-hill     Ansible       linux
+#   other Ubuntu install.sh    linux / linux,dev
+#
+# --save-env remembers the envs in miserc.local.toml, so every mise command (and the shell)
+# uses the same layers without -E.
+#
+#   mise bootstrap --dry-run   # preview (envs are remembered by --save-env in miserc.local.toml)
+#   mise bootstrap             # apply
+#   mise dot status            # check dotfile links
+
+[settings]
+activate_aggressive = true
+
+[tools]
+fzf = "0.75.0"
+gh = "2.105.0"
+bat = "0.26.1"
+jq = "1.8.2"
+"github:svent/sift" = "0.9.2"
+
+[dotfiles]
+"~/.config/fish" = "~/.dotfishy/fish"
+"~/.vimrc" = "~/.dotfishy/vim/vimrc"
+"~/.vim/colors/solarized.vim" = "~/.dotfishy/vim/solarized.vim"
+"~/.tmux.conf" = "~/.dotfishy/tmux/tmux.conf"

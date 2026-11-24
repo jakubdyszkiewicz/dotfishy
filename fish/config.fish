@@ -1,5 +1,3 @@
-set -gx PATH /usr/local/bin $PATH 
-set -gx PATH /opt/homebrew/bin $PATH
 set -gx PATH $HOME/bin $PATH
 set -gx KUMA_REPORTS_ENABLED false
 set -gx PATH $HOME/kong/kuma/build/artifacts-darwin-amd64/kumactl/ $PATH

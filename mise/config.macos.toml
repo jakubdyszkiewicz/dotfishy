@@ -1,0 +1,50 @@
+# Profile for macos machines
+[bootstrap.user]
+login_shell = "/opt/homebrew/bin/fish"
+
+[dotfiles]
+"~/.gitconfig" = "~/.dotfishy/git/gitconfig"
+"~/.hammerspoon" = "~/.dotfishy/hammerspoon"
+"~/.config/karabiner" = "~/.dotfishy/karabiner"
+"~/Library/Application Support/Code/User/settings.json" = "~/.dotfishy/vscode/settings.json"
+
+[bootstrap.settings.macos.defaults."com.apple.dock"]
+tilesize = 42.0
+
+[bootstrap.settings.macos.defaults.NSGlobalDomain]
+CGFontRenderingFontSmoothingDisabled = false
+
+[bootstrap.settings.macos.defaults."com.apple.finder"]
+WarnOnEmptyTrash = false
+
+[bootstrap.hooks]
+post-defaults = "killall Dock || true"
+
+[bootstrap.packages]
+"brew:blueutil" = "latest"
+"brew:fish" = "latest"
+"brew:gnu-tar" = "latest"
+"brew:htop" = "latest"
+"brew:mas" = "latest"
+"brew:mise" = "latest"
+"brew:ncdu" = "latest"
+"brew:p7zip" = "latest"
+"brew:step" = "latest"
+"brew:switchaudio-osx" = "latest"
+"brew:tmux" = "latest"
+"brew:tree" = "latest"
+"brew:wget" = "latest"
+"brew-cask:chatgpt" = "latest"
+"brew-cask:hammerspoon" = "latest"
+"brew-cask:hiddenbar" = "latest"
+"brew-cask:iterm2" = "latest"
+"brew-cask:karabiner-elements" = "latest"
+"brew-cask:obsidian" = "latest"
+"brew-cask:rancher" = "latest"
+"brew-cask:raycast" = "latest"
+"brew-cask:scroll-reverser" = "latest"
+"brew-cask:spotify" = "latest"
+"brew-cask:visual-studio-code" = "latest"
+"brew-cask:zed" = "latest"
+"mas:1319778037" = "latest" # iStat Menus
+"mas:497799835" = "latest" # Xcode
