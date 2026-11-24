@@ -30,7 +30,9 @@ login_shell = "/opt/homebrew/bin/fish"
 "~/Library/Application Support/Code/User/settings.json" = "~/.dotfishy/vscode/settings.json"
 
 # --- macOS defaults (was macos/macos.sh) ---
-[bootstrap.settings.macos.dock]
+# Raw table, not [bootstrap.settings.macos.dock]: that one only takes integers,
+# but the Dock stores tilesize as a real.
+[bootstrap.settings.macos.defaults."com.apple.dock"]
 tilesize = 42.0
 
 [bootstrap.settings.macos.defaults.NSGlobalDomain]
