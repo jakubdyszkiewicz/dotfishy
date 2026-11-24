@@ -6,6 +6,7 @@
 [bootstrap.packages]
 "apt:fish" = "latest"
 "apt:htop" = "latest"   # preinstalled on cloud images, not necessarily on Ubuntu Desktop (ant-hill)
+"apt:ncdu" = "latest"
 "apt:tmux" = "latest"
 "apt:tree" = "latest"
 "apt:vim" = "latest"
