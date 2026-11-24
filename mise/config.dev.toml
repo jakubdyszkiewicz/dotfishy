@@ -7,3 +7,5 @@ node = "24.22.1"
 java = "temurin-27.0.1.1+4"   # mise also sets JAVA_HOME
 rust = "1.100.0"
 cmake = "4.5.1"
+opencode = "2.3.2"      # was brew anomalyco/tap/opencode-v2
+claude-code = "2.1.323" # was brew cask claude-code

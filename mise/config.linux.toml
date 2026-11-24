@@ -3,9 +3,6 @@
 # runs `mise bootstrap --only packages` as root, then `--only dotfiles,tools` as the user.
 # Docker, users, the login shell (chsh) etc. stay in Ansible.
 
-[tools]
-btop = "1.4.8"   # Linux-only in mise; Macs get it from brew
-
 [bootstrap.packages]
 "apt:fish" = "latest"
 "apt:htop" = "latest"   # preinstalled on cloud images, not necessarily on Ubuntu Desktop (ant-hill)
