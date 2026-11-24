@@ -1,16 +1,13 @@
-# Development machines: every Mac (MacBooks, Mac mini) and ant-dev.
-# Loaded with `-E macos,dev,<role>` (install.sh) or `-E linux,dev` (ant-hill).
-
+# Profile for machines (macs or linux) used for development
 [tools]
 go = "1.27.3"
 node = "24.22.1"
-java = "temurin-27.0.1.1+4"   # mise also sets JAVA_HOME
+java = "temurin-27.0.1.1+4"
 rust = "1.100.0"
 cmake = "4.5.1"
-opencode = "2.3.2"      # was brew anomalyco/tap/opencode-v2
-claude-code = "2.1.323" # was brew cask claude-code
-codex = "0.171.0"       # was brew cask codex
+opencode = "2.3.2"
+claude-code = "2.1.323"
+codex = "0.171.0"
 
-# Linux dev machines only (Macs get compilers from the Xcode tools).
 [bootstrap.packages]
-"apt:build-essential" = { os = "linux" }
+"apt:build-essential" = { os = "linux" } # Macs get compilers from the Xcode tools

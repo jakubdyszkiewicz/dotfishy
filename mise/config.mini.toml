@@ -1,7 +1,5 @@
-# Mac mini build server: iOS/macOS apps (Xcode), Rust and Go (tools), containers via
-# Rancher Desktop - all from config.macos.toml. Mostly used over SSH. Loaded with `-E macos,mini`.
+# Profile for mac mini build server
 
-# One-off system settings that need sudo, run by hand: `mise run mini:power`
 [tasks."mini:power"]
 description = "Never sleep, restart after a power failure, wake on LAN"
 run = "sudo pmset -a sleep 0 disksleep 0 autorestart 1 womp 1"

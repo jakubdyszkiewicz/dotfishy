@@ -21,15 +21,13 @@
 [settings]
 activate_aggressive = true
 
-# CLI tools: same pinned versions on every machine, installed in $HOME (no sudo)
 [tools]
-fzf = "0.75.0"   # fish key bindings come from `fzf --fish`
+fzf = "0.75.0"
 gh = "2.105.0"
 bat = "0.26.1"
 jq = "1.8.2"
-"github:svent/sift" = "0.9.2"   # grep alternative; not in the registry, and apt's `sift` is a different program
+"github:svent/sift" = "0.9.2"
 
-# Shell, prompt and editor: the same on every machine
 [dotfiles]
 "~/.config/fish" = "~/.dotfishy/fish"
 "~/.vimrc" = "~/.dotfishy/vim/vimrc"

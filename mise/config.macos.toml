@@ -1,5 +1,4 @@
-# Every Mac (MacBooks and the Mac mini). Loaded with `-E macos,dev,<role>` by install.sh.
-
+# Profile for macos machines
 [bootstrap.user]
 login_shell = "/opt/homebrew/bin/fish"
 
@@ -9,9 +8,6 @@ login_shell = "/opt/homebrew/bin/fish"
 "~/.config/karabiner" = "~/.dotfishy/karabiner"
 "~/Library/Application Support/Code/User/settings.json" = "~/.dotfishy/vscode/settings.json"
 
-# --- macOS defaults (was macos/macos.sh) ---
-# Raw table, not [bootstrap.settings.macos.dock]: that one only takes integers,
-# but the Dock stores tilesize as a real.
 [bootstrap.settings.macos.defaults."com.apple.dock"]
 tilesize = 42.0
 
@@ -24,9 +20,6 @@ WarnOnEmptyTrash = false
 [bootstrap.hooks]
 post-defaults = "killall Dock || true"
 
-# --- Packages for every Mac (was brew/Brewfile) ---
-# brew / casks / App Store can't pin versions; "latest" means "installed".
-# Upgrade with `mise bootstrap packages upgrade`.
 [bootstrap.packages]
 "brew:blueutil" = "latest"
 "brew:fish" = "latest"

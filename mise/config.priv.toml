@@ -1,4 +1,4 @@
-# Private MacBook only. Loaded with `mise bootstrap -E priv` (see config.toml).
+# Profile for private Macbook
 
 [bootstrap.hooks]
 # mise does not manage `brew services`
@@ -28,7 +28,7 @@ post-packages = "brew services start syncthing || true"
 "mas:1091189122" = "latest" # Bear
 "mas:1193539993" = "latest" # Brother iPrint&Scan
 "mas:682658836" = "latest" # GarageBand
-"mas:6472865291" = "latest" # keymapp
+"mas:6472865291" = "latest" # keymapp (for Moonlander keyboard)
 "mas:409203825" = "latest" # Numbers
 "mas:409201541" = "latest" # Pages
 "mas:904280696" = "latest" # Things

@@ -1,13 +1,9 @@
-# Linux boxes provisioned by ant-hill (ant-dev, ant-services, ant-hill itself).
-# Loaded with `-E linux[,<role>]` by the ant-hill `dotfiles` role: it installs git + mise,
-# runs `mise bootstrap --only packages` as root, then `--only dotfiles,tools` as the user.
-# Docker, users, the login shell (chsh) etc. stay in Ansible.
-
+# Profile for general linux machines (may or may not be used for development)
 [bootstrap.packages]
 "apt:fish" = "latest"
-"apt:htop" = "latest"   # preinstalled on cloud images, not necessarily on Ubuntu Desktop (ant-hill)
+"apt:htop" = "latest"
 "apt:ncdu" = "latest"
-"apt:python3" = "latest"   # preinstalled on Ubuntu, but not in ubuntu container images (isodev)
+"apt:python3" = "latest"
 "apt:tmux" = "latest"
 "apt:tree" = "latest"
 "apt:vim" = "latest"
