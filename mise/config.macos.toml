@@ -46,5 +46,4 @@ post-defaults = "killall Dock || true"
 "brew-cask:spotify" = "latest"
 "brew-cask:visual-studio-code" = "latest"
 "brew-cask:zed" = "latest"
-"mas:1319778037" = "latest" # iStat Menus
 "mas:497799835" = "latest" # Xcode
