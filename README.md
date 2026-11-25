@@ -61,6 +61,7 @@ installs the apt packages (with sudo), links the dotfiles, installs the tools an
 * `mise bootstrap packages use brew-cask:foo` - install an app and add it to the config
 * `mise bootstrap packages upgrade` - upgrade packages
 * `mise dot status` - check dotfile links
+* `mise run dotfishy:drift` - what's not committed or declared yet: repo changes, hand-installed brew/cask/App Store packages, replaced dotfile links. New shells show a one-line reminder (checked in the background once a day).
 
 ## Components
 

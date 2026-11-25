@@ -34,3 +34,7 @@ jq = "1.8.2"
 "~/.vimrc" = "~/.dotfishy/vim/vimrc"
 "~/.vim/colors/solarized.vim" = "~/.dotfishy/vim/solarized.vim"
 "~/.tmux.conf" = "~/.dotfishy/tmux/tmux.conf"
+
+[tasks."dotfishy:drift"]
+description = "Show how this machine drifted from ~/.dotfishy (uncommitted changes, undeclared packages, broken links)"
+run = "bash ~/.dotfishy/mise/scripts/drift.sh"
