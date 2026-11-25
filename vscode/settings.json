@@ -5,7 +5,7 @@
     "editor.inlineSuggest.enabled": true,
     "editor.minimap.enabled": false,
     "files.autoSave": "afterDelay",
-    "workbench.colorTheme": "Solarized Light",
+    "workbench.colorTheme": "Everforest Complete Dark",
     "github.copilot.editor.enableAutoCompletions": true,
     "github.copilot.enable": {
         "*": false,
@@ -13,5 +13,6 @@
         "markdown": false,
         "scminput": false
     },
-    "github.copilot.nextEditSuggestions.enabled": true
+    "github.copilot.nextEditSuggestions.enabled": true,
+    "security.promptForRemoteFileProtocolHandling": false
 }
