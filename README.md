@@ -23,7 +23,8 @@ Each machine loads `mise/config.toml` plus layers: an OS (`macos`/`linux`), `dev
 With `install.sh` the role comes from the gitignored `profile` file (also read by fish and Hammerspoon).
 CLI tools (fzf, gh, bat, jq, sift) are mise `[tools]` in `config.toml`: same pinned versions on every machine.
 On Linux, Ansible installs git + mise, clones this repo, runs `mise bootstrap --only packages` as root
-(the `apt:` entries in `config.linux.toml`) and `--only dotfiles,tools` as the user; docker, users etc. stay in Ansible.
+(the `apt:` entries in `config.linux.toml`) and `--only dotfiles,tools` as the user; users, services etc. stay in Ansible.
+Dev machines get Docker from `config.dev.toml`; servers that run containers in production (ant-services) get it from Ansible.
 
 ## A fresh MacOS Setup
 

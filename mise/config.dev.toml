@@ -12,3 +12,8 @@ codex = "0.171.0"
 [bootstrap.packages]
 "apt:build-essential" = { os = "linux" } # Macs get compilers from the Xcode tools
 "apt:bubblewrap" = { os = "linux" } # sandbox for code. macOS has its own.
+# docker for development. Machines that run containers in prod get it other way
+"apt:docker.io" = { os = "linux" }
+"apt:docker-compose-v2" = { os = "linux" }
+"apt:docker-buildx" = { os = "linux" }
+"brew-cask:rancher" = { os = "macos" } # ships compose and buildx
