@@ -16,4 +16,5 @@ codex = "0.171.0"
 # from Ansible instead: it pins Compose and controls when the daemon restarts.
 "apt:docker.io" = { os = "linux" }
 "apt:docker-compose-v2" = { os = "linux" }
+"apt:docker-buildx" = { os = "linux" } # `docker build` uses BuildKit only with buildx
 "brew-cask:rancher" = { os = "macos" }
