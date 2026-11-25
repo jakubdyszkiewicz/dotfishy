@@ -1,8 +1,5 @@
 set -gx PATH $HOME/bin $PATH
 set -gx KUMA_REPORTS_ENABLED false
-set -gx PATH $HOME/kong/kuma/build/artifacts-darwin-amd64/kumactl/ $PATH
-set -gx PATH $HOME/kong/kuma/build/artifacts-darwin-amd64/kuma-dp/ $PATH
-set -gx PATH $HOME/kong/kuma/build/artifacts-darwin-amd64/kuma-cp/ $PATH
 set -gx GOPATH $HOME/go
 set -gx PATH $GOPATH/bin $PATH
 set -gx CLOUDSDK_PYTHON python2
@@ -25,9 +22,9 @@ if test -f $profile_file
     end
 end
 
-# Created by `pipx` on 2024-12-19 19:36:02
-set PATH $PATH /Users/jakub/.local/bin
-
+# Rancher Desktop (Mac only). It rewrites the lines between its markers; keep them inside the if.
+if test (uname) = Darwin
 ### MANAGED BY RANCHER DESKTOP START (DO NOT EDIT)
 set --export --prepend PATH "/Users/jakub/.rd/bin"
 ### MANAGED BY RANCHER DESKTOP END (DO NOT EDIT)
+end
