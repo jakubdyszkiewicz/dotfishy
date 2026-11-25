@@ -12,7 +12,7 @@ if test -s $drift_cache
     set_color normal
 end
 
-set -l mtime (stat -f %m $drift_cache 2>/dev/null; or stat -c %Y $drift_cache 2>/dev/null; or echo 0)
+set -l mtime (date -r $drift_cache +%s 2>/dev/null; or echo 0) # works with BSD (macOS) and GNU date
 if test (math (date +%s) - $mtime) -gt 86400
     touch $drift_cache # don't start another check from the next shell while this one runs
     bash $drift_script --summary > /dev/null 2>&1 &
