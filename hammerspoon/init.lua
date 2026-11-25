@@ -25,6 +25,77 @@ if profile == "priv" then
 	dofile(hs.configdir .. "/priv.lua")
 end
 
+local function findDismissAction(element)
+	local priorities = {
+		['Close'] = 1,
+		['Dismiss'] = 2,
+		['Clear'] = 3,
+		['Clear All'] = 4,
+	}
+	local bestAction
+	local bestPriority = math.huge
+
+	for _, action in ipairs(element:actionNames() or {}) do
+		local name = action:match('^Name:([^\n]+)')
+		local priority = priorities[name]
+		if priority and priority < bestPriority then
+			bestAction = action
+			bestPriority = priority
+		end
+	end
+
+	return bestAction
+end
+
+local function collectNotifications(element, candidates, depth)
+	depth = depth or 0
+	if depth > 12 then return end
+
+	local subrole = element:attributeValue('AXSubrole')
+	if subrole == 'AXNotificationCenterAlert'
+		or subrole == 'AXNotificationCenterAlertStack' then
+		local action = findDismissAction(element)
+		if action then
+			local frame = element:attributeValue('AXFrame') or { x = 0, y = math.huge }
+			table.insert(candidates, {
+				element = element,
+				action = action,
+				frame = frame,
+			})
+		end
+	end
+
+	for _, child in ipairs(element:attributeValue('AXChildren') or {}) do
+		collectNotifications(child, candidates, depth + 1)
+	end
+end
+
+local function dismissNotification()
+	local apps = hs.application.applicationsForBundleID('com.apple.notificationcenterui')
+	local app = apps[1]
+	if not app then return end
+
+	local appElement = hs.axuielement.applicationElement(app)
+	local candidates = {}
+	collectNotifications(appElement, candidates)
+
+	table.sort(candidates, function(a, b)
+		if a.frame.y == b.frame.y then
+			return a.frame.x > b.frame.x
+		end
+		return a.frame.y < b.frame.y
+	end)
+
+	if candidates[1] then
+		local result, err = candidates[1].element:performAction(candidates[1].action)
+		if not result then
+			log:e('Could not dismiss notification: ' .. tostring(err))
+		end
+	end
+end
+
+hs.hotkey.bind(hyper, 'f12', dismissNotification)
+
 -- Grid
 hs.grid.setMargins(hs.geometry.size(0,0))
 hs.grid.setGrid('6x2')
@@ -34,8 +105,6 @@ hs.hotkey.bind(hyper,'g',function()
 end)
 
 -- Resize
-hs.hotkey.bind(hyper, 'p', function() hs.grid.set(hs.window.focusedWindow(), '0,0, 3x1') end)
-hs.hotkey.bind(hyper, 'o', function() hs.grid.set(hs.window.focusedWindow(), '0,2, 3x1') end)
 hs.hotkey.bind(hyper, '[', function() hs.grid.set(hs.window.focusedWindow(), '3,0, 3x1') end)
 hs.hotkey.bind(hyper, ']', function() hs.grid.set(hs.window.focusedWindow(), '3,2, 3x1') end)
 hs.hotkey.bind(hyper, ';', function() hs.grid.set(hs.window.focusedWindow(), '0,0 3x2') end)

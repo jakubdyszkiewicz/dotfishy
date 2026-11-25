@@ -4,19 +4,20 @@ local base = dofile(hs.configdir .. "/base.lua")
 
 -- Application mappings
 appMaps = {
-	f = 'Google Chrome',
+	f = 'Helium',
 	c = 'ChatGPT',
 	m = 'Messenger',
-	v = 'Visual Studio Code',
+	v = 'Zed',
 	a = 'Discord',
 	s = 'Slack',
-	e = 'Goland',
+	e = 'Pazedo',
 	r = 'ForkLift',
 	d = 'iTerm',
 	b = 'Bear',
 	z = 'Spotify',
 	t = 'Things3',
-  	x = 'Calendar'
+  	x = 'Calendar',
+	p = 'Paseo'
 }
 
 hyperApps(appMaps)
