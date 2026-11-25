@@ -11,3 +11,4 @@ codex = "0.171.0"
 
 [bootstrap.packages]
 "apt:build-essential" = { os = "linux" } # Macs get compilers from the Xcode tools
+"apt:bubblewrap" = { os = "linux" } # sandbox for code. macOS has its own.
