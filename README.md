@@ -1,6 +1,6 @@
 # dot-🐟-y (my dotfiles)
 Since new Macbooks are so fragile, I've created repo to setup my Mac faster.
-It installs [Fish](https://fishshell.com/) as a shell and [Solarized Light](https://ethanschoonover.com/solarized/) theme across apps.
+It installs [Fish](https://fishshell.com/) as a shell and the [Everforest](https://github.com/sainnhe/everforest) dark theme across apps.
 The killer feature is the [Hyper key](http://brettterpstra.com/2012/12/08/a-useful-caps-lock-key/) config with lots of shortcuts.
 
 ![iTerm](https://i.imgur.com/StrxYCA.png)
@@ -72,7 +72,7 @@ installs the apt packages (with sudo), links the dotfiles, installs the tools an
 * Removing an entry does not uninstall it: `mise bootstrap packages prune --manager brew --dry-run` lists leftovers.
 
 ### Fish + fisher
-* Solarized Light Theme
+* Everforest Dark colors
 * Fancy Prompt
 * [z](https://github.com/rupa/z/)
 * [fzf](https://github.com/junegunn/fzf) for `cmd + R`
@@ -86,7 +86,7 @@ installs the apt packages (with sudo), links the dotfiles, installs the tools an
 * Various modifications.
 
 ### iTerm
-* Solarized Light Theme
+* Everforest Dark colors
 
 ### Karabiner-Elements
 * Change Caps Lock to Hyper key
@@ -97,11 +97,11 @@ installs the apt packages (with sudo), links the dotfiles, installs the tools an
 * `[bootstrap.settings.macos]` in `mise/config.toml`.
 
 ### Vim
-* Solarized Light Theme
+* Everforest theme (vendored in `vim/pack/themes`)
 * Basic settings to set vim to be usable
 
 ### Visual Studio Code
-* Solarized Light Theme
+* Everforest Complete Dark theme
 
 ### sshrc
 Use simple bash config on the remote machine. It sets up:
@@ -111,7 +111,6 @@ Use simple bash config on the remote machine. It sets up:
 
 ## TODO
 * Hammerspoon mods docs
-* Solarized Light `bat` theme
 * `bat` autocompletion
 * automate `xcode-install`?
 * Maybe just use [mackup](https://github.com/lra/mackup)? It will sync prefs live using Dropbox

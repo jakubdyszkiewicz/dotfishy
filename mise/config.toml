@@ -32,7 +32,7 @@ jq = "1.8.2"
 [dotfiles]
 "~/.config/fish" = "~/.dotfishy/fish"
 "~/.vimrc" = "~/.dotfishy/vim/vimrc"
-"~/.vim/colors/solarized.vim" = "~/.dotfishy/vim/solarized.vim"
+"~/.vim/pack/themes" = "~/.dotfishy/vim/pack/themes"
 "~/.tmux.conf" = "~/.dotfishy/tmux/tmux.conf"
 
 [tasks."dotfishy:drift"]

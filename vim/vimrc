@@ -34,7 +34,19 @@ set sidescroll=1
 set laststatus=2
 set noshowmode "Show current mode down the bottom
 
-set background=light
-colorscheme solarized
+" ================ Colors: Everforest (vim/pack/themes) ===
+
+if has('termguicolors')
+    " tmux/screen TERMs don't get the true-color escapes by default
+    if &term =~# '^screen\|^tmux'
+        let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+        let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+    endif
+    set termguicolors
+endif
+set background=dark
+let g:everforest_background = 'medium'
+let g:everforest_transparent_background = 1 " use the terminal's background
+colorscheme everforest
 
 map <C-n> :NERDTreeToggle<CR>
