@@ -11,3 +11,7 @@ codex = "0.171.0"
 
 [bootstrap.packages]
 "apt:build-essential" = { os = "linux" } # Macs get compilers from the Xcode tools
+# Linux sandbox for the coding agents above: codex and Claude Code run commands in bubblewrap;
+# Claude Code also proxies the sandbox's network through socat. macOS has its own sandbox.
+"apt:bubblewrap" = { os = "linux" }
+"apt:socat" = { os = "linux" }
