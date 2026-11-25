@@ -1,5 +1,14 @@
 # Profile for mac mini build server
 
+[tools]
+# TODO: move to the Pazedo repo's mise.toml; only its Linux remote-server builds need it
+# (cargo-zigbuild, script/pazedo/remote-server).
+zig = "0.17.1"
+
+[bootstrap.packages]
+"brew:hermes-agent" = "latest"
+"brew-cask:tailscale-app" = "latest"
+
 [tasks."mini:power"]
 description = "Never sleep, restart after a power failure, wake on LAN"
 run = "sudo pmset -a sleep 0 disksleep 0 autorestart 1 womp 1"
